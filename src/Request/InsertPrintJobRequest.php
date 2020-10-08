@@ -1,0 +1,48 @@
+<?php
+
+namespace Mrpix\CloudPrintSDK\Request;
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+class InsertPrintJobRequest
+{
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Regex("/^[A-Za-z0-9\-_]{3,16}$/")
+     */
+    protected $printerName;
+
+    /**
+     * @Assert\AtLeastOneOf({
+     *     @Assert\IsNull(),
+     *     @Assert\Regex("/^[\d]{14,14}$/")
+     * })
+     */
+    protected $startTime;
+
+    public function __construct(?string $printerName=null, ?string $startTime=null)
+    {
+        $this->printerName = $printerName;
+        $this->startTime = $startTime;
+    }
+
+    public function setPrinterName(string $printerName) : void
+    {
+        $this->printerName = $printerName;
+    }
+
+    public function getPrinterName() : ?string
+    {
+        return $this->printerName;
+    }
+
+    public function setStartTime(string $startTime) : void
+    {
+        $this->startTime = $startTime;
+    }
+
+    public function getStartTime() : ?string
+    {
+        return $this->startTime;
+    }
+}
