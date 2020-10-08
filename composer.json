@@ -1,0 +1,21 @@
+{
+    "name": "mrpix/cloudprintsdk",
+    "description": "This is the official PHP library to use the mpXcloudprint services.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Manuel Kienlein",
+            "email": "manuel.kienlein@mr-pixel.de"
+        }
+    ],
+    "version": "1.0.0",
+    "minimum-stability": "alpha",
+    "require": {
+        "php": ">=7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mrpix\\CloudPrintSDK\\": "src/"
+        }
+    }
+}
