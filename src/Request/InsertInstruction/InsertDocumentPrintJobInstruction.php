@@ -8,12 +8,14 @@ use Mrpix\CloudPrintSDK\Request\InsertDocumentPrintJobRequest;
 class InsertDocumentPrintJobInstruction extends InsertPrintJobInstruction
 {
     protected $documentContent;
+    protected $documentName;
     protected $documentMediaType;
 
-    public function __construct(?string $printerName=null, ?string $documentContent=null, string $mediaType=null, ?DateTime $startTime=null)
+    public function __construct(?string $printerName=null, ?string $documentContent=null, ?string $documentName=null, string $mediaType=null, ?DateTime $startTime=null)
     {
         parent::__construct($printerName, $startTime);
         $this->documentContent = $documentContent;
+        $this->documentName = $documentName;
         $this->documentMediaType = $mediaType;
     }
 
@@ -25,6 +27,16 @@ class InsertDocumentPrintJobInstruction extends InsertPrintJobInstruction
     public function getDocumentContent() : ?string
     {
         return $this->documentContent;
+    }
+
+    public function setDocumentName(string $documentName) : void
+    {
+        $this->documentName = $documentName;
+    }
+
+    public function getDocumentName() : ?string
+    {
+        return $this->documentName;
     }
 
     public function setDocumentMediaType(string $mediaType) : void

@@ -6,10 +6,8 @@ use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
 use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertTemplatePrintJobInstruction;
 
 
-//CloudPrintClient::test();
-
 $sdk = new CloudPrintClient();
-$sdk->login('manuel.kienlein@mr-pixel.de', 'password');
+$sdk->login('manuel.kienlein@mr-pixel.de', 'MrpixCloudPrint_admin');
 
 $instruction = new InsertTemplatePrintJobInstruction('Pixeldrucker', 'Standard', ['variable'=>'content']);
 $request = $instruction->buildRequest();

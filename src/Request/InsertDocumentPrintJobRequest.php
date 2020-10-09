@@ -21,10 +21,17 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
      */
     protected $documentMediaType;
 
-    public function __construct(?string $printerName=null, ?string $documentContent=null, ?string $mediaType=null, ?string $startTime=null)
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Regex("/^[\w,\s-]+\.[A-Za-z]{3}$/")
+     */
+    protected $documentName;
+
+    public function __construct(?string $printerName=null, ?string $documentContent=null, ?string $documentName=null, ?string $mediaType=null, ?string $startTime=null)
     {
         parent::__construct(CloudPrintClient::SERVER_URL.'printjob/document', $printerName, $startTime);
         $this->documentContent = $documentContent;
+        $this->documentName = $documentName;
         $this->documentMediaType = $mediaType;
     }
 
@@ -36,6 +43,16 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
     public function getDocumentContent() : ?string
     {
         return $this->documentContent;
+    }
+
+    public function setDocumentName(string $documentName) : void
+    {
+        $this->documentName = $documentName;
+    }
+
+    public function getDocumentName() : ?string
+    {
+        return $this->documentName;
     }
 
     public function setDocumentMediaType(string $documentMediaType) : void
@@ -52,7 +69,7 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
     {
         $builder
             ->addResource('printerName', $this->printerName)
-            ->addResource('documentFile', $this->documentContent, ['filename' => 'file.stm'])
+            ->addResource('documentFile', $this->documentContent, ['filename' => $this->documentName])
             ->addResource('documentMediaType', $this->documentMediaType);
 
         if($this->startTime !== null){

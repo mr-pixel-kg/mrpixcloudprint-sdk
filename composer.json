@@ -22,7 +22,8 @@
         "php-http/message": "^1.9",
         "symfony/validator": "^5.1",
         "doctrine/annotations": "^1.10",
-        "doctrine/cache": "^1.10"
+        "doctrine/cache": "^1.10",
+        "ext-json": "*"
     },
     "require-dev": {
         "php-http/guzzle6-adapter": "~0.2@dev",
