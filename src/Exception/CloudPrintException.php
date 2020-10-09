@@ -1,10 +1,8 @@
 <?php
 
-
 namespace Mrpix\CloudPrintSDK\Exception;
 
-
-class CloudPrintException
+interface CloudPrintException extends \Throwable
 {
 
 }

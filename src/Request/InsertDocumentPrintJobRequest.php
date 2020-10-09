@@ -2,6 +2,8 @@
 
 namespace Mrpix\CloudPrintSDK\Request;
 
+use Http\Message\MultipartStream\MultipartStreamBuilder;
+use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
@@ -19,9 +21,11 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
      */
     protected $documentMediaType;
 
-    public function __construct(?string $printerName=null, ?string $documentFile=null, ?string $mediaType=null, ?string $startTime=null)
+    public function __construct(?string $printerName=null, ?string $documentContent=null, ?string $mediaType=null, ?string $startTime=null)
     {
-        parent::__construct($printerName, $startTime);
+        parent::__construct(CloudPrintClient::SERVER_URL.'printjob/document', $printerName, $startTime);
+        $this->documentContent = $documentContent;
+        $this->documentMediaType = $mediaType;
     }
 
     public function setDocumentContent(string $documentContent) : void
@@ -42,5 +46,19 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
     public function getDocumentMediaType() : ?string
     {
         return $this->documentMediaType;
+    }
+
+    public function buildMultipart(MultipartStreamBuilder $builder): MultipartStreamBuilder
+    {
+        $builder
+            ->addResource('printerName', $this->printerName)
+            ->addResource('documentFile', $this->documentContent, ['filename' => 'file.stm'])
+            ->addResource('documentMediaType', $this->documentMediaType);
+
+        if($this->startTime !== null){
+            $builder = $builder->addResource('startTime', $this->startTime);
+        }
+
+        return $builder;
     }
 }

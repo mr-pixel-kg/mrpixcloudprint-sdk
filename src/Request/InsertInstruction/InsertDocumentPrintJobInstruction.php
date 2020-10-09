@@ -10,9 +10,11 @@ class InsertDocumentPrintJobInstruction extends InsertPrintJobInstruction
     protected $documentContent;
     protected $documentMediaType;
 
-    public function __construct(?string $printerName=null, ?string $documentFile=null, array $mediaType = [], ?DateTime $startTime=null)
+    public function __construct(?string $printerName=null, ?string $documentContent=null, string $mediaType=null, ?DateTime $startTime=null)
     {
         parent::__construct($printerName, $startTime);
+        $this->documentContent = $documentContent;
+        $this->documentMediaType = $mediaType;
     }
 
     public function setDocumentContent(string $documentContent) : void
@@ -37,6 +39,6 @@ class InsertDocumentPrintJobInstruction extends InsertPrintJobInstruction
 
     public function buildRequest() : InsertDocumentPrintJobRequest
     {
-        return new InsertDocumentPrintJobRequest($this->printerName, $this->documentContent, $this->documentMediaType, $this->startTime->format('YmdHis'));
+        return new InsertDocumentPrintJobRequest($this->printerName, $this->documentContent, $this->documentMediaType, ($this->startTime)?$this->startTime->format('YmdHis'):null);
     }
 }
