@@ -4,6 +4,13 @@ mpXcloudprint API. Below is a short instruction with some examples to get starte
 information, please visit our official documentation.
 
 ## Installation
+This library is not dependent to any http client like Guzzle. You can use any http client hat supposrts the 
+[php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation).
+
+To get started quickly:
+```
+composer require php-http/guzzle6-adapter nyholm/psr7 symfony/http-client
+```
 
 ## Usage
 This project depends on Composer. It is recomended to let the Composer autoloader automatically load all your 
