@@ -17,4 +17,7 @@ $request = $instruction->buildRequest();
 //$instruction = new InsertDocumentPrintJobInstruction('Pixeldrucker', 'This is the content of the document', 'document.stm', MediaTypes::TEXT_VND_STAR_MARKUP, new DateTime('now'));
 //$request = $instruction->buildRequest();
 
-$sdk->send($request);
+/** @var \Mrpix\CloudPrintSDK\Response\PrintJobResponse $response */
+$response = $sdk->send($request);
+
+echo $response->getPrintJob()['id'];

@@ -47,7 +47,7 @@ class CloudPrintClient
         }
 
         $responseBuilder= new ResponseBuilder;
-        $cloudPrintResponse = $responseBuilder->decodeResponse( $request, $response,PrintJobResponse::class);
+        $cloudPrintResponse = $responseBuilder->decodeResponse( $request, $response, $cloudPrintRequest->getResponseModel());
 
         if($response->getStatusCode() !== 200){
             throw new ServerException($cloudPrintResponse);
@@ -61,11 +61,16 @@ class CloudPrintClient
      */
     public function checkLoginCredentials($username, $password)
     {
-        //$this->l
         $oldAuth = $this->authentification;
 
         $this->login($username, $password);
         //@todo send request and validate response
+
+        /*try{
+
+        }catch(ServerException $e){
+
+        }*/
 
         $this->authentification = $oldAuth;
 

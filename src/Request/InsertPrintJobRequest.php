@@ -2,6 +2,7 @@
 
 namespace Mrpix\CloudPrintSDK\Request;
 
+use Mrpix\CloudPrintSDK\Response\PrintJobResponse;
 use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class InsertPrintJobRequest extends CloudPrintRequest
@@ -22,7 +23,7 @@ abstract class InsertPrintJobRequest extends CloudPrintRequest
 
     public function __construct(?string $url=null, ?string $printerName=null, ?string $startTime=null)
     {
-        parent::__construct( $url, 'POST');
+        parent::__construct( $url, 'POST', PrintJobResponse::class);
         $this->printerName = $printerName;
         $this->startTime = $startTime;
     }

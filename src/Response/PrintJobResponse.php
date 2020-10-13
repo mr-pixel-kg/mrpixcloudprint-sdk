@@ -11,4 +11,9 @@ class PrintJobResponse extends CloudPrintResponse
         parent::__construct($data);
         $this->printJob = $data['printJob'];
     }
+
+    public function getPrintJob() : array
+    {
+        return $this->printJob;
+    }
 }
