@@ -20,4 +20,10 @@ $request = $instruction->buildRequest();
 /** @var \Mrpix\CloudPrintSDK\Response\PrintJobResponse $response */
 $response = $sdk->send($request);
 
-echo $response->getPrintJob()['id'];
+//echo $response->getPrintJob()['id'];
+
+/*if($sdk->checkLoginCredentials('manuel.kienlein@mr-pixel.de', 'password')){
+    echo 'Login successful!';
+}else{
+    echo 'Login failed!';
+}*/

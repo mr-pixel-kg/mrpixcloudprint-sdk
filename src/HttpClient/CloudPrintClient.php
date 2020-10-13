@@ -9,6 +9,7 @@ use Http\Message\Authentication\BasicAuth;
 use Mrpix\CloudPrintSDK\Exception\ConstraintViolationException;
 use Mrpix\CloudPrintSDK\Exception\NetworkException;
 use Mrpix\CloudPrintSDK\Exception\ServerException;
+use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;
 use Mrpix\CloudPrintSDK\Response\CloudPrintResponse;
 use Mrpix\CloudPrintSDK\Response\PrintJobResponse;
@@ -56,30 +57,25 @@ class CloudPrintClient
         return $cloudPrintResponse;
     }
 
-    /**
-     * @deprecated Not implemented yet
-     */
     public function checkLoginCredentials($username, $password)
     {
+        $success = false;
         $oldAuth = $this->authentification;
 
         $this->login($username, $password);
-        //@todo send request and validate response
 
-        /*try{
-
+        try{
+            $request = new CheckLoginRequest();
+            $response = $this->send($request);
+            if($response->getStatusCode() === 200){
+                $success = true;
+            }
         }catch(ServerException $e){
-
-        }*/
+        }
 
         $this->authentification = $oldAuth;
 
-        $response = null;
-        if($response->getStatusCode() === 200){
-            return true;
-        }else{
-            return false;
-        }
+        return $success;
     }
 
     public function login(string $username, string $password)
