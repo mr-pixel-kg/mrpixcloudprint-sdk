@@ -8,7 +8,9 @@ use Http\Message\Authentication;
 use Http\Message\Authentication\BasicAuth;
 use Mrpix\CloudPrintSDK\Exception\ConstraintViolationException;
 use Mrpix\CloudPrintSDK\Exception\NetworkException;
+use Mrpix\CloudPrintSDK\Exception\ServerException;
 use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;
+use Mrpix\CloudPrintSDK\Response\CloudPrintResponse;
 use Mrpix\CloudPrintSDK\Response\PrintJobResponse;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validation;
@@ -17,6 +19,7 @@ class CloudPrintClient
 {
     const SERVER_URL = 'https://dev.cloudprint.mpxcloud.de/api/v1/';
 
+    private $client;
     private $validator;
     private $requestBuilder;
 
@@ -28,39 +31,29 @@ class CloudPrintClient
             ->enableAnnotationMapping()
             ->getValidator();
         $this->requestBuilder = new RequestBuilder($this);
+        $this->client = HttpClientDiscovery::find();
     }
 
-    public function send(CloudPrintRequest $cloudPrintRequest)
+    public function send(CloudPrintRequest $cloudPrintRequest) : CloudPrintResponse
     {
         $this->validateRequest($cloudPrintRequest);
-
-        $client = HttpClientDiscovery::find();
 
         $request = $this->requestBuilder->build($cloudPrintRequest);
 
         try {
-            $response = $client->sendRequest($request);
+            $response = $this->client->sendRequest($request);
         } catch (Exception $e) {
             throw new NetworkException('A network exception occured!', 0, $e);
         }
-        var_dump(['code' => $response->getStatusCode().' '.$response->getReasonPhrase(), 'body' => $response->getBody()->getContents()]);
-
-        if($response->getStatusCode() !== 200){
-            echo 'StatusCode is not 200!';
-            switch($response->getStatusCode()){
-                case 404:
-                    break;
-                case 500:
-                    break;
-                default:
-                    break;
-            }
-        }
 
         $responseBuilder= new ResponseBuilder;
-        $object = $responseBuilder->decodeResponse($response, PrintJobResponse::class);
+        $cloudPrintResponse = $responseBuilder->decodeResponse( $request, $response,PrintJobResponse::class);
 
-        var_dump($object);
+        if($response->getStatusCode() !== 200){
+            throw new ServerException($cloudPrintResponse);
+        }
+
+        return $cloudPrintResponse;
     }
 
     /**
@@ -72,7 +65,7 @@ class CloudPrintClient
         $oldAuth = $this->authentification;
 
         $this->login($username, $password);
-        //@todo send request and validate respone
+        //@todo send request and validate response
 
         $this->authentification = $oldAuth;
 

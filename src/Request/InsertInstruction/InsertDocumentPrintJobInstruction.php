@@ -51,6 +51,6 @@ class InsertDocumentPrintJobInstruction extends InsertPrintJobInstruction
 
     public function buildRequest() : InsertDocumentPrintJobRequest
     {
-        return new InsertDocumentPrintJobRequest($this->printerName, $this->documentContent, $this->documentMediaType, ($this->startTime)?$this->startTime->format('YmdHis'):null);
+        return new InsertDocumentPrintJobRequest($this->printerName, $this->documentContent, $this->documentName, $this->documentMediaType, ($this->startTime)?$this->startTime->format('YmdHis'):null);
     }
 }

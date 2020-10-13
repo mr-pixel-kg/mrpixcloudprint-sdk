@@ -3,14 +3,21 @@
 namespace Mrpix\CloudPrintSDK\Request;
 
 use Http\Message\MultipartStream\MultipartStreamBuilder;
+use Mrpix\CloudPrintSDK\Components\MediaTypes;
 use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
 {
+    const ALLOWED_MEDIA_TYPES =  MediaTypes::ALLOWED_INPUT_MEDIATYPES;
+
     /**
      * @Assert\NotBlank()
-     * @Assert\File(maxSize="4096k")
+     * @Assert\Length(
+     *     min = 16,
+     *     max = 4096,
+     *     allowEmptyString = false
+     * )
      */
     protected $documentContent;
 
@@ -23,7 +30,7 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Regex("/^[\w,\s-]+\.[A-Za-z]{3}$/")
+     * @Assert\Regex("/^[\w,\s-]+\.[A-Za-z]{2,4}$/")
      */
     protected $documentName;
 

@@ -2,8 +2,11 @@
 
 namespace Mrpix\CloudPrintSDK\HttpClient;
 
+use Exception;
+use LogicException;
 use Mrpix\CloudPrintSDK\Exception\ResponseDecodeException;
 use Mrpix\CloudPrintSDK\Response\CloudPrintResponse;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class ResponseBuilder
@@ -13,7 +16,7 @@ class ResponseBuilder
 
     }
 
-    public function decodeResponse(ResponseInterface $response, string $class)
+    public function decodeResponse(RequestInterface $request, ResponseInterface $response, string $class) : CloudPrintResponse
     {
         $body = $response->getBody();
         $data = json_decode($body, true);
@@ -23,9 +26,14 @@ class ResponseBuilder
         }
 
         if(is_subclass_of($class, CloudPrintResponse::class)) {
-            $object = new $class($data);
+            try{
+                $object = new $class($data);
+                $object->initOrigin($request, $response);
+            }catch(Exception $e){
+                throw new ResponseDecodeException('Failed to init response!');
+            }
         }else{
-            throw new \LogicException('No valid response class given!');
+            throw new LogicException('No valid response class given!');
         }
 
         return $object;
