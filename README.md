@@ -28,6 +28,18 @@ Here is a example on how to do that:
 $client->login('your-username@example.com', 'yourSecretPassword');
 ```
 
+Note: If the login credentials are not correct, the server will return a 401 or 403 response.
+#### Test login credentials
+To test if login credentials are correct, you can use the following example:
+```
+if($client->checkLoginCredentials('your-username@example.com', 'yourSecretPassword'))
+{
+    echo 'Login successful!';
+}else{
+    echo 'Login failed!';
+}
+```
+
 ### Insert a new printjob
 The following section explaines how to create a new printjob. It is recommended to create a new instance of an instruction.
 The request can be build by using the 'build' method of the instruction. By compiling the request, all given data will be 
@@ -50,10 +62,3 @@ $request = $instruction->buildRequest();
 
 $client->send($request);
 ```
-
-## SONSTIGES: Benötigte Pakete der Anwendung, für HTTPlug
-composer require php-http/curl-client guzzlehttp/psr7 php-http/message
-
-http://docs.php-http.org/en/latest/httplug/library-developers.html
-
-https://www.sitepoint.com/breaking-free-from-guzzle5-with-php-http-and-httplug/
