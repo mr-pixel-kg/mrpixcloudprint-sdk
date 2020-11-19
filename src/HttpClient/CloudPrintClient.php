@@ -12,13 +12,12 @@ use Mrpix\CloudPrintSDK\Exception\ServerException;
 use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;
 use Mrpix\CloudPrintSDK\Response\CloudPrintResponse;
-use Mrpix\CloudPrintSDK\Response\PrintJobResponse;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validation;
 
 class CloudPrintClient
 {
-    const SERVER_URL = 'https://dev.cloudprint.mpxcloud.de/api/v1/';
+    const SERVER_URL = 'https://cloudprint.mpxcloud.de/api/v1/';
 
     private $client;
     private $validator;
