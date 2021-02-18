@@ -53,7 +53,7 @@ class MediaTypes
         }
     }
 
-    public static function isAllowedInputMediaType($mediaType) : bool
+    public static function isAllowedInputMediaType(string $mediaType) : bool
     {
         return in_array($mediaType, self::ALLOWED_INPUT_MEDIATYPES);
     }

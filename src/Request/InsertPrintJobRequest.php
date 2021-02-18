@@ -23,7 +23,7 @@ abstract class InsertPrintJobRequest extends CloudPrintRequest
 
     public function __construct(?string $url=null, ?string $printerName=null, ?string $startTime=null)
     {
-        parent::__construct( $url, 'POST', PrintJobResponse::class);
+        parent::__construct( $url, CloudPrintRequest::HTTP_METHOD_POST, PrintJobResponse::class);
         $this->printerName = $printerName;
         $this->startTime = $startTime;
     }

@@ -1,10 +1,10 @@
 # MrpixCloudPrint SDK
 This is the official PHP SDK of mr.pixel's CloudPrint service. This library contains methods to easily interact with the
-mpXcloudprint API. Below is a short instruction with some examples to get startet with this SDK. For additional 
+mpXcloudprint API. Below is a short instruction with some examples to get started with this SDK. For additional 
 information, please visit our official documentation.
 
 ## Installation
-This library is not dependent to any http client like Guzzle. You can use any http client hat supposrts the 
+This library is not dependent to any http client like Guzzle. You can use any http client hat supports the 
 [php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation).
 
 To get started quickly:

@@ -8,6 +8,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class CloudPrintRequest
 {
+    const HTTP_METHOD_GET = 'GET';
+    const HTTP_METHOD_POST = 'POST';
+
     /**
      * @Assert\NotBlank()
      * @Assert\Choice({"GET", "POST"})
@@ -22,7 +25,7 @@ abstract class CloudPrintRequest
 
     protected $responseModel;
 
-    public function __construct(?string $url=null, ?string $method='GET', ?string $responseModel=CloudPrintResponse::class)
+    public function __construct(?string $url=null, ?string $method=self::HTTP_METHOD_GET, ?string $responseModel=CloudPrintResponse::class)
     {
         $this->method = $method;
         $this->url = $url;
@@ -34,7 +37,7 @@ abstract class CloudPrintRequest
         $this->method = $method;
     }
 
-    public function getMethod()
+    public function getMethod() : string
     {
         return $this->method;
     }
@@ -44,7 +47,7 @@ abstract class CloudPrintRequest
         $this->url = $url;
     }
 
-    public function getUrl()
+    public function getUrl() : string
     {
         return $this->url;
     }
