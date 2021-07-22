@@ -13,7 +13,7 @@ composer require php-http/guzzle6-adapter nyholm/psr7 symfony/http-client
 ```
 
 ## Usage
-This project depends on Composer. It is recomended to let the Composer autoloader automatically load all your 
+This project depends on Composer. It is recommended to let the Composer autoloader automatically load all your 
 dependencies. The example below will show you how to include the client for the mpXcloudprint API.
 ```
 require 'vendor/autoload.php';
@@ -41,14 +41,20 @@ if($client->checkLoginCredentials('your-username@example.com', 'yourSecretPasswo
 ```
 
 ### Insert a new printjob
-The following section explaines how to create a new printjob. It is recommended to create a new instance of an instruction.
+The following section explains how to create a new printjob. It is recommended to create a new instance of an instruction.
 The request can be build by using the 'build' method of the instruction. By compiling the request, all given data will be 
 automatically parsed to the required format by the API.
 
 #### Template
-The following example can be used to create a new printjob based on a pre defined template:
+The following example can be used to create a new printjob based on a pre-defined template:
 ```
-$instruction = new InsertTemplatePrintJobInstruction('Printername', 'Templatename', ['variable_key'=>'variable_value']);
+$instruction = new InsertTemplatePrintJobInstruction(
+    'Printername', 
+    'Templatename',
+    [
+        'variable_key'=>'variable_value'
+    ]
+);
 $request = $instruction->buildRequest();
 
 $client->send($request);
@@ -57,7 +63,12 @@ $client->send($request);
 #### Document
 If you do not want to use a template, you can upload a whole document. To do that, you can use the following code:
 ```
-$instruction = new InsertDocumentPrintJobInstruction('Printername', 'This is the content of the document', 'nameOfTheFile.stm', MediaTypes::TEXT_VND_STAR_MARKUP);
+$instruction = new InsertDocumentPrintJobInstruction(
+    'Printername', 
+    'This is the content of the document', 
+    'nameOfTheFile.stm', 
+    MediaTypes::TEXT_VND_STAR_MARKUP
+);
 $request = $instruction->buildRequest();
 
 $client->send($request);
