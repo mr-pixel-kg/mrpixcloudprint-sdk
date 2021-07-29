@@ -33,5 +33,10 @@
         "psr-4": {
             "Mrpix\\CloudPrintSDK\\": "src/"
         }
+    },
+    "scripts": {
+        "test": [
+            "phpunit --testdox tests"
+        ]
     }
 }

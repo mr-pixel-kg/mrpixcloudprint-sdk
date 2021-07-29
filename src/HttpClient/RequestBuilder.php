@@ -28,6 +28,7 @@ class RequestBuilder
         $multipartStream = $builder->build();
 
         $request = $this->requestFactory->createRequest($cloudPrintRequest->getMethod(), $cloudPrintRequest->getUrl());
+        $request = $request->withAddedHeader('User-Agent', CloudPrintClient::USER_AGENT);
         $request = $request->withAddedHeader('Content-Type', 'multipart/form-data; boundary="'.$builder->getBoundary().'"');
         $request = $request->withBody($multipartStream);
         $builder->reset();
