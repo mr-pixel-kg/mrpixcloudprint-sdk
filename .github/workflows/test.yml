@@ -1,0 +1,114 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  codestyle:
+    name: "Code Style Analysis"
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out repository to $GITHUB_WORKSPACE
+      - name: "Checkout code"
+        uses: actions/checkout@v3
+
+      - name: "PHP-Code-Style"
+        uses: docker://oskarstark/php-cs-fixer-ga
+        with:
+          args: --diff --dry-run
+
+  static-code-analysis:
+    name: "Static Code Analysis"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v3
+
+      - name: Setup PHP ${{ matrix.php-versions }} and Composer 2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: composer:v2
+
+      - name: "Cache Composer packages"
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+            
+      - name: "Install dependencies"
+        id: install
+        run: composer install --prefer-dist --no-progress --optimize-autoloader
+
+      - name: "PHPStan"
+        run: |
+          ./vendor/bin/phpstan analyse src/
+
+  lint:
+    name: "Linting"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v3
+
+      - name: "Validate composer.json and composer.lock"
+        run: composer validate --strict
+
+      - name: "Cache Composer packages"
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+            
+      - name: "Install dependencies"
+        id: install
+        run: composer install --prefer-dist --no-progress
+
+  unit-tests:
+    name: "Unit Tests"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v3
+
+      - name: Setup PHP and Composer 2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: phpunit, composer:v2
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+            
+      - name: "Install dependencies"
+        id: install
+        run: |
+          composer install --no-progress --optimize-autoloader
+
+      - name: "Run PhpUnit tests"
+        run: composer run-script test
