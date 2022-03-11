@@ -27,22 +27,22 @@ class InsertTemplatePrintJobRequest extends InsertPrintJobRequest
         $this->templateVariables = $templateVariables;
     }
 
-    public function setTemplateName(string $templateName) : void
+    public function setTemplateName(string $templateName): void
     {
         $this->templateName = $templateName;
     }
 
-    public function getTemplateName() : ?string
+    public function getTemplateName(): ?string
     {
         return $this->templateName;
     }
 
-    public function setTemplateVariables(string $templateVariablesJson) : void
+    public function setTemplateVariables(string $templateVariablesJson): void
     {
         $this->templateVariables = $templateVariablesJson;
     }
 
-    public function getTemplateVariables() : ?string
+    public function getTemplateVariables(): ?string
     {
         return $this->templateVariables;
     }
@@ -54,7 +54,7 @@ class InsertTemplatePrintJobRequest extends InsertPrintJobRequest
             ->addResource('templateName', $this->templateName)
             ->addResource('templateVariables', $this->templateVariables);
 
-        if($this->startTime !== null){
+        if ($this->startTime !== null) {
             $builder = $builder->addResource('startTime', $this->startTime);
         }
 

@@ -22,35 +22,32 @@ class ServerException extends \RuntimeException implements CloudPrintException
         $data = $this->response->getData();
         $this->data = $data;
 
-        if($response->getMessage() !== null){
+        if ($response->getMessage() !== null) {
             $this->message = $response->getMessage();
         }
 
-        if(array_key_exists('exception', $data)){
+        if (array_key_exists('exception', $data)) {
             $this->exception = new JsonException($data['exception']);
         }
     }
 
-    public function getResponse() : CloudPrintResponse
+    public function getResponse(): CloudPrintResponse
     {
         return $this->response;
     }
 
-    public function getData() : array
+    public function getData(): array
     {
         return $this->data;
     }
 
-    public function getStatusCode() : int
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
-    public function getServerException() : ?JsonException
+    public function getServerException(): ?JsonException
     {
         return $this->exception;
     }
-
-
-
 }

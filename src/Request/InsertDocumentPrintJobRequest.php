@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
 {
-    const ALLOWED_MEDIA_TYPES =  MediaTypes::ALLOWED_INPUT_MEDIATYPES;
+    public const ALLOWED_MEDIA_TYPES =  MediaTypes::ALLOWED_INPUT_MEDIATYPES;
 
     /**
      * @Assert\NotBlank()
@@ -42,32 +42,32 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
         $this->documentMediaType = $mediaType;
     }
 
-    public function setDocumentContent(string $documentContent) : void
+    public function setDocumentContent(string $documentContent): void
     {
         $this->documentContent = $documentContent;
     }
 
-    public function getDocumentContent() : ?string
+    public function getDocumentContent(): ?string
     {
         return $this->documentContent;
     }
 
-    public function setDocumentName(string $documentName) : void
+    public function setDocumentName(string $documentName): void
     {
         $this->documentName = $documentName;
     }
 
-    public function getDocumentName() : ?string
+    public function getDocumentName(): ?string
     {
         return $this->documentName;
     }
 
-    public function setDocumentMediaType(string $documentMediaType) : void
+    public function setDocumentMediaType(string $documentMediaType): void
     {
         $this->documentMediaType = $documentMediaType;
     }
 
-    public function getDocumentMediaType() : ?string
+    public function getDocumentMediaType(): ?string
     {
         return $this->documentMediaType;
     }
@@ -79,7 +79,7 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
             ->addResource('documentFile', $this->documentContent, ['filename' => $this->documentName])
             ->addResource('documentMediaType', $this->documentMediaType);
 
-        if($this->startTime !== null){
+        if ($this->startTime !== null) {
             $builder = $builder->addResource('startTime', $this->startTime);
         }
 

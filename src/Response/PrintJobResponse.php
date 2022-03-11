@@ -12,7 +12,7 @@ class PrintJobResponse extends CloudPrintResponse
         $this->printJob = $data['printJob'];
     }
 
-    public function getPrintJob() : array
+    public function getPrintJob(): array
     {
         return $this->printJob;
     }

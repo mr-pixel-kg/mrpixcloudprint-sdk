@@ -13,7 +13,8 @@ use function PHPUnit\Framework\assertEquals;
 
 class InsertPrintJobTest extends TestCase
 {
-    public function testInsertDocumentPrintJob(){
+    public function testInsertDocumentPrintJob()
+    {
         $sdk = new CloudPrintClient();
         $sdk->login(CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD);
 
@@ -22,7 +23,8 @@ class InsertPrintJobTest extends TestCase
             'This is the content of the document',
             'document.stm',
             MediaTypes::TEXT_VND_STAR_MARKUP,
-            new DateTime('now'));
+            new DateTime('now')
+        );
         $request = $instruction->buildRequest();
 
         /** @var PrintJobResponse $response */
@@ -30,14 +32,16 @@ class InsertPrintJobTest extends TestCase
         assertEquals(200, $response->getStatusCode());
     }
 
-    public function testInsertTemplatePrintJob(){
+    public function testInsertTemplatePrintJob()
+    {
         $sdk = new CloudPrintClient();
         $sdk->login(CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD);
 
         $instruction = new InsertTemplatePrintJobInstruction(
             'Pixeldrucker',
             'Standard',
-            ['variable'=>'content']);
+            ['variable'=>'content']
+        );
         $request = $instruction->buildRequest();
 
         /** @var PrintJobResponse $response */

@@ -34,12 +34,10 @@ class RequestBuilder
         $builder->reset();
 
         $auth = $this->cloudPrintClient->getAuthentification();
-        if($auth !== null){
+        if ($auth !== null) {
             $request = $auth->authenticate($request);
         }
 
         return $request;
     }
-
-
 }

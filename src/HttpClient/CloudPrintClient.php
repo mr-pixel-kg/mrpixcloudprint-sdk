@@ -18,8 +18,8 @@ use Symfony\Component\Validator\Validation;
 
 class CloudPrintClient
 {
-    const SERVER_URL = 'https://cloudprint.mpxcloud.de/api/v1/';
-    const USER_AGENT = 'MrpixCloudPrintSDK/'.CloudPrintSDK::VERSION;
+    public const SERVER_URL = 'https://cloudprint.mpxcloud.de/api/v1/';
+    public const USER_AGENT = 'MrpixCloudPrintSDK/'.CloudPrintSDK::VERSION;
 
     private $client;
     private $validator;
@@ -36,7 +36,7 @@ class CloudPrintClient
         $this->client = HttpClientDiscovery::find();
     }
 
-    public function send(CloudPrintRequest $cloudPrintRequest) : CloudPrintResponse
+    public function send(CloudPrintRequest $cloudPrintRequest): CloudPrintResponse
     {
         $this->validateRequest($cloudPrintRequest);
 
@@ -48,10 +48,10 @@ class CloudPrintClient
             throw new NetworkException('A network exception occured!', 0, $e);
         }
 
-        $responseBuilder= new ResponseBuilder;
-        $cloudPrintResponse = $responseBuilder->decodeResponse( $request, $response, $cloudPrintRequest->getResponseModel());
+        $responseBuilder= new ResponseBuilder();
+        $cloudPrintResponse = $responseBuilder->decodeResponse($request, $response, $cloudPrintRequest->getResponseModel());
 
-        if($response->getStatusCode() !== 200){
+        if ($response->getStatusCode() !== 200) {
             throw new ServerException($cloudPrintResponse);
         }
 
@@ -65,13 +65,13 @@ class CloudPrintClient
 
         $this->login($username, $password);
 
-        try{
+        try {
             $request = new CheckLoginRequest();
             $response = $this->send($request);
-            if($response->getStatusCode() === 200){
+            if ($response->getStatusCode() === 200) {
                 $success = true;
             }
-        }catch(ServerException $e){
+        } catch (ServerException $e) {
         }
 
         $this->authentification = $oldAuth;
@@ -84,7 +84,7 @@ class CloudPrintClient
         $this->authentification = new BasicAuth($username, $password);
     }
 
-    public function getAuthentification() : Authentication
+    public function getAuthentification(): Authentication
     {
         return $this->authentification;
     }
@@ -93,14 +93,14 @@ class CloudPrintClient
     {
         $validatorErrors = $this->validator->validate($request);
 
-        if(count($validatorErrors) > 0){
+        if (count($validatorErrors) > 0) {
             $requestViolations = [];
             /** @var ConstraintViolation $violation */
-            foreach($validatorErrors as $violation){
+            foreach ($validatorErrors as $violation) {
                 array_push($requestViolations, [
                     'field' => $violation->getPropertyPath(),
                     'message' => $violation->getMessage(),
-                    'constraint' => ($violation->getConstraint() !== null)?(new \ReflectionClass($violation->getConstraint()))->getShortName():null,
+                    'constraint' => ($violation->getConstraint() !== null) ? (new \ReflectionClass($violation->getConstraint()))->getShortName() : null,
                     'value' => $violation->getInvalidValue()
                 ]);
             }

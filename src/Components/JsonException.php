@@ -16,5 +16,4 @@ class JsonException extends \Exception
     {
         return $this->name;
     }
-
 }

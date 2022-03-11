@@ -15,25 +15,25 @@ abstract class InsertPrintJobInstruction
         $this->startTime = $startTime;
     }
 
-    public function setPrinterName(string $printerName) : void
+    public function setPrinterName(string $printerName): void
     {
         $this->printerName = $printerName;
     }
 
-    public function getPrinterName() : ?string
+    public function getPrinterName(): ?string
     {
         return $this->printerName;
     }
 
-    public function setStartTime(DateTime $startTime) : void
+    public function setStartTime(DateTime $startTime): void
     {
         $this->startTime = $startTime;
     }
 
-    public function getStartTime() : ?DateTime
+    public function getStartTime(): ?DateTime
     {
         return $this->startTime;
     }
 
-    public abstract function buildRequest();
+    abstract public function buildRequest();
 }

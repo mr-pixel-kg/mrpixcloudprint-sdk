@@ -4,13 +4,13 @@ namespace Mrpix\CloudPrintSDK\Components;
 
 class MediaTypes
 {
-    const TEXT_PLAIN = 'text/plain';
-    const TEXT_VND_STAR_MARKUP = 'text/vnd.star.markup';
-    const APPLICATION_VND_STAR_STARPRNT = 'application/vnd.star.starprnt';
-    const IMAGE_PNG = 'image/png';
+    public const TEXT_PLAIN = 'text/plain';
+    public const TEXT_VND_STAR_MARKUP = 'text/vnd.star.markup';
+    public const APPLICATION_VND_STAR_STARPRNT = 'application/vnd.star.starprnt';
+    public const IMAGE_PNG = 'image/png';
 
     // MimeType | FileEnding
-    const MEDIATYPE_MAP = [
+    public const MEDIATYPE_MAP = [
         'text/plain' => [
             'ext' => 'txt',
             'desc' => 'Plain Text'
@@ -29,31 +29,31 @@ class MediaTypes
         ]
     ];
 
-    const ALLOWED_INPUT_MEDIATYPES = [
+    public const ALLOWED_INPUT_MEDIATYPES = [
         self::TEXT_PLAIN,
         self::TEXT_VND_STAR_MARKUP,
         self::IMAGE_PNG
     ];
 
-    public static function getFileExtension(string $mediaType) : ?string
+    public static function getFileExtension(string $mediaType): ?string
     {
-        if(in_array($mediaType, array_keys(self::MEDIATYPE_MAP))){
+        if (in_array($mediaType, array_keys(self::MEDIATYPE_MAP))) {
             return self::MEDIATYPE_MAP[$mediaType]['ext'];
-        }else{
+        } else {
             return null;
         }
     }
 
-    public static function getDescription(string $mediaType) : ?string
+    public static function getDescription(string $mediaType): ?string
     {
-        if(in_array($mediaType, array_keys(self::MEDIATYPE_MAP))){
+        if (in_array($mediaType, array_keys(self::MEDIATYPE_MAP))) {
             return self::MEDIATYPE_MAP[$mediaType]['desc'];
-        }else{
+        } else {
             return null;
         }
     }
 
-    public static function isAllowedInputMediaType(string $mediaType) : bool
+    public static function isAllowedInputMediaType(string $mediaType): bool
     {
         return in_array($mediaType, self::ALLOWED_INPUT_MEDIATYPES);
     }

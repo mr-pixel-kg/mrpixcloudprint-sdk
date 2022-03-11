@@ -19,7 +19,7 @@ abstract class CloudPrintResponse
         $this->data = $data;
 
         $this->statusCode = $data['statusCode'];
-        if(array_key_exists('message', $data)){
+        if (array_key_exists('message', $data)) {
             $this->message = $data['message'];
         }
     }
@@ -45,7 +45,7 @@ abstract class CloudPrintResponse
         $this->statusCode = $statusCode;
     }
 
-    public function getStatusCode() : int
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }
@@ -55,7 +55,7 @@ abstract class CloudPrintResponse
         $this->message = $message;
     }
 
-    public function getMessage() : ?string
+    public function getMessage(): ?string
     {
         return $this->message;
     }
@@ -65,7 +65,7 @@ abstract class CloudPrintResponse
         $this->data = $data;
     }
 
-    public function getData() : array
+    public function getData(): array
     {
         return $this->data;
     }

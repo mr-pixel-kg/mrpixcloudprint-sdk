@@ -17,28 +17,28 @@ class InsertTemplatePrintJobInstruction extends InsertPrintJobInstruction
         $this->templateVariables = $templateVariables;
     }
 
-    public function setTemplateName(string $templateName) : void
+    public function setTemplateName(string $templateName): void
     {
         $this->templateName = $templateName;
     }
 
-    public function getTemplateName() : ?string
+    public function getTemplateName(): ?string
     {
         return $this->templateName;
     }
 
-    public function setTemplateVariables(array $variables) : void
+    public function setTemplateVariables(array $variables): void
     {
         $this->templateVariables = $variables;
     }
 
-    public function getTemplateVariables() : array
+    public function getTemplateVariables(): array
     {
         return $this->templateVariables;
     }
 
-    public function buildRequest() : InsertTemplatePrintJobRequest
+    public function buildRequest(): InsertTemplatePrintJobRequest
     {
-        return new InsertTemplatePrintJobRequest($this->printerName, $this->templateName, json_encode($this->templateVariables), ($this->startTime)?$this->startTime->format('YmdHis'):null);
+        return new InsertTemplatePrintJobRequest($this->printerName, $this->templateName, json_encode($this->templateVariables), ($this->startTime) ? $this->startTime->format('YmdHis') : null);
     }
 }

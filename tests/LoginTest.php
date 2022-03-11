@@ -8,22 +8,20 @@ use function PHPUnit\Framework\assertEquals;
 
 class LoginTest extends TestCase
 {
-
     /**
      * @dataProvider loginCredentials
      */
-    public function testLoginCredentials($username, $password, $assert){
-
+    public function testLoginCredentials($username, $password, $assert)
+    {
         $sdk = new CloudPrintClient();
         assertEquals($assert, $sdk->checkLoginCredentials($username, $password));
-
     }
 
-    public function loginCredentials() : array{
+    public function loginCredentials(): array
+    {
         return [
             ['test@example.com', 'thisIsAWrongPassword', false],
             [CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD, true]
         ];
     }
-
 }

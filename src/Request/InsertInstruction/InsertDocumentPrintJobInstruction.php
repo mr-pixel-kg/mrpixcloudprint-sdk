@@ -19,38 +19,38 @@ class InsertDocumentPrintJobInstruction extends InsertPrintJobInstruction
         $this->documentMediaType = $mediaType;
     }
 
-    public function setDocumentContent(string $documentContent) : void
+    public function setDocumentContent(string $documentContent): void
     {
         $this->documentContent = $documentContent;
     }
 
-    public function getDocumentContent() : ?string
+    public function getDocumentContent(): ?string
     {
         return $this->documentContent;
     }
 
-    public function setDocumentName(string $documentName) : void
+    public function setDocumentName(string $documentName): void
     {
         $this->documentName = $documentName;
     }
 
-    public function getDocumentName() : ?string
+    public function getDocumentName(): ?string
     {
         return $this->documentName;
     }
 
-    public function setDocumentMediaType(string $mediaType) : void
+    public function setDocumentMediaType(string $mediaType): void
     {
         $this->documentMediaType = $mediaType;
     }
 
-    public function getDocumentMediaType() : ?string
+    public function getDocumentMediaType(): ?string
     {
         return $this->documentMediaType;
     }
 
-    public function buildRequest() : InsertDocumentPrintJobRequest
+    public function buildRequest(): InsertDocumentPrintJobRequest
     {
-        return new InsertDocumentPrintJobRequest($this->printerName, $this->documentContent, $this->documentName, $this->documentMediaType, ($this->startTime)?$this->startTime->format('YmdHis'):null);
+        return new InsertDocumentPrintJobRequest($this->printerName, $this->documentContent, $this->documentName, $this->documentMediaType, ($this->startTime) ? $this->startTime->format('YmdHis') : null);
     }
 }

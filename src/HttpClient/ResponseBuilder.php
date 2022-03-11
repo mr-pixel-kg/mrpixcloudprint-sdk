@@ -13,26 +13,25 @@ class ResponseBuilder
 {
     public function __construct()
     {
-
     }
 
-    public function decodeResponse(RequestInterface $request, ResponseInterface $response, string $class) : CloudPrintResponse
+    public function decodeResponse(RequestInterface $request, ResponseInterface $response, string $class): CloudPrintResponse
     {
         $body = $response->getBody();
         $data = json_decode($body, true);
 
-        if($data === null) {
+        if ($data === null) {
             throw new ResponseDecodeException('Failed to decode response!');
         }
 
-        if(is_subclass_of($class, CloudPrintResponse::class)) {
-            try{
+        if (is_subclass_of($class, CloudPrintResponse::class)) {
+            try {
                 $object = new $class($data);
                 $object->initOrigin($request, $response);
-            }catch(Exception $e){
+            } catch (Exception $e) {
                 throw new ResponseDecodeException('Failed to init response!');
             }
-        }else{
+        } else {
             throw new LogicException('No valid response class given!');
         }
 
