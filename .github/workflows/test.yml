@@ -12,14 +12,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out repository to $GITHUB_WORKSPACE
       - name: "Checkout code"
         uses: actions/checkout@v3
 
-      - name: "PHP-Code-Style"
-        uses: docker://oskarstark/php-cs-fixer-ga
+      - name: "Cache Composer packages"
+        id: composer-cache
+        uses: actions/cache@v2
         with:
-          args: --diff --dry-run
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: "Install dependencies"
+        id: install
+        run: composer install --prefer-dist --no-progress --optimize-autoloader
+
+      - name: "PHP CS-Fixer"
+        run: |
+          ./vendor/bin/php-cs-fixer fix --diff --dry-run
 
   static-code-analysis:
     name: "Static Code Analysis"
@@ -44,7 +55,7 @@ jobs:
 
       - name: "PHPStan"
         run: |
-          ./vendor/bin/phpstan analyse src/
+          composer run-script phpstan
 
   lint:
     name: "Linting"
