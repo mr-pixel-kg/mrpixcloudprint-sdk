@@ -29,7 +29,7 @@
         "nyholm/psr7": "^1.3",
         "phpunit/phpunit": "^9.0",
 		"symfony/http-client": "^5.2",
-        "friendsofphp/php-cs-fixer": "^3.7"
+        "friendsofphp/php-cs-fixer": "^3.4"
     },
     "autoload": {
         "psr-4": {
@@ -38,7 +38,7 @@
     },
     "scripts": {
         "test": [
-            "phpunit tests"
+            "vendor/bin/phpunit tests"
         ],
         "phpstan": [
             "vendor/bin/phpstan analyse"
