@@ -7,8 +7,10 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Message\Authentication;
 use Http\Message\Authentication\BasicAuth;
 use Mrpix\CloudPrintSDK\CloudPrintSDK;
+use Mrpix\CloudPrintSDK\Exception\CloudPrintException;
 use Mrpix\CloudPrintSDK\Exception\ConstraintViolationException;
 use Mrpix\CloudPrintSDK\Exception\NetworkException;
+use Mrpix\CloudPrintSDK\Exception\ResponseDecodeException;
 use Mrpix\CloudPrintSDK\Exception\ServerException;
 use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;
@@ -83,7 +85,7 @@ class CloudPrintClient
             if ($response->getStatusCode() === 200) {
                 $success = true;
             }
-        } catch (ServerException $e) {
+        } catch (CloudPrintException $e) {
         }
 
         $this->authentication = $oldAuth;
