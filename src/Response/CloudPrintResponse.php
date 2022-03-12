@@ -5,7 +5,7 @@ namespace Mrpix\CloudPrintSDK\Response;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class CloudPrintResponse
+class CloudPrintResponse
 {
     protected $request;
     protected $response;
@@ -18,7 +18,7 @@ abstract class CloudPrintResponse
     {
         $this->data = $data;
 
-        $this->statusCode = $data['statusCode'];
+        $this->statusCode = intval($data['statusCode']);
         if (array_key_exists('message', $data)) {
             $this->message = $data['message'];
         }

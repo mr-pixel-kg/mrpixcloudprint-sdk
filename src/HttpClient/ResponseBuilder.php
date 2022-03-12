@@ -29,7 +29,13 @@ class ResponseBuilder
                 $object = new $class($data);
                 $object->initOrigin($request, $response);
             } catch (Exception $e) {
-                throw new ResponseDecodeException('Failed to init response!');
+                // Try to initialize fallback response object
+                try {
+                    $object = new CloudPrintResponse($data);
+                    $object->initOrigin($request, $response);
+                } catch (Exception $e) {
+                    throw new ResponseDecodeException('Failed to init response!');
+                }
             }
         } else {
             throw new LogicException('No valid response class given!');

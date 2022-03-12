@@ -21,7 +21,8 @@ class LoginTest extends TestCase
     {
         return [
             ['test@example.com', 'thisIsAWrongPassword', false],
-            ['mpxcloudprint-sandbox@mr-pixel.de', 'Mrpix2020_CP', true]
+            [CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD, true],
+            [CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD.'wrong', false]
         ];
     }
 }
