@@ -18,8 +18,8 @@ use Symfony\Component\Validator\Validation;
 
 class CloudPrintClient
 {
-    public const SERVER_URL = 'https://cloudprint.mpxcloud.de/api/v1/';
     public const USER_AGENT = 'MrpixCloudPrintSDK/'.CloudPrintSDK::VERSION;
+    public const DEFAULT_SERVER_URL = 'https://cloudprint.mpxcloud.de';
 
     private $client;
     private $validator;
@@ -99,6 +99,18 @@ class CloudPrintClient
     public function getAuthentication(): Authentication
     {
         return $this->authentication;
+    }
+
+    public static function getServerUrl(): string
+    {
+        // Change server url if specified in ENV
+        $serverUrl = getenv(CloudPrintSDK::ENV_SERVER);
+        ;
+        if ($serverUrl) {
+            return rtrim($serverUrl, "/");
+        } else {
+            return self::DEFAULT_SERVER_URL;
+        }
     }
 
     private function validateRequest(CloudPrintRequest $request)

@@ -36,7 +36,7 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
 
     public function __construct(?string $printerName=null, ?string $documentContent=null, ?string $documentName=null, ?string $mediaType=null, ?string $startTime=null)
     {
-        parent::__construct(CloudPrintClient::SERVER_URL.'printjob/document', $printerName, $startTime);
+        parent::__construct(CloudPrintClient::getServerUrl().'/api/v1/printjob/document', $printerName, $startTime);
         $this->documentContent = $documentContent;
         $this->documentName = $documentName;
         $this->documentMediaType = $mediaType;

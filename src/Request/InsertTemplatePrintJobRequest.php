@@ -22,7 +22,7 @@ class InsertTemplatePrintJobRequest extends InsertPrintJobRequest
 
     public function __construct(?string $printerName=null, ?string $templateName=null, ?string $templateVariables=null, ?string $startTime=null)
     {
-        parent::__construct(CloudPrintClient::SERVER_URL.'printjob/template', $printerName, $startTime);
+        parent::__construct(CloudPrintClient::getServerUrl().'/api/v1/printjob/template', $printerName, $startTime);
         $this->templateName = $templateName;
         $this->templateVariables = $templateVariables;
     }
