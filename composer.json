@@ -44,7 +44,7 @@
             "vendor/bin/phpstan analyse"
         ],
         "cs-fixer": [
-            "vendor/bin/php-cs-fixer fix src tests"
+            "vendor/bin/php-cs-fixer fix"
         ]
     }
 }

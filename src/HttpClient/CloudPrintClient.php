@@ -37,13 +37,13 @@ class CloudPrintClient
         $this->client = HttpClientDiscovery::find();
 
         // If no credentials are provided look for ENV variables
-        if($username == null && $password == null) {
+        if ($username == null && $password == null) {
             $username = getenv(CloudPrintSDK::ENV_USERNAME);
             $password = getenv(CloudPrintSDK::ENV_PASSWORD);
         }
 
         // Authenticate if credentials are given or provided in ENV
-        if($username && $password) {
+        if ($username && $password) {
             $this->login($username, $password);
         }
     }
