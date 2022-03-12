@@ -4,4 +4,8 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="MRPIX_CLOUDPRINT_USERNAME" value="your-username@example.com"/>
+        <env name="MRPIX_CLOUDPRINT_PASSWORD" value="yourSecretPassword"/>
+    </php>
 </phpunit>

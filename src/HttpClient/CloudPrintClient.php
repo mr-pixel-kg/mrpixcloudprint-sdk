@@ -29,7 +29,7 @@ class CloudPrintClient
 
     public function __construct(?string $username=null, ?string $password=null)
     {
-        // Initilaisation
+        // Initialisation
         $this->validator = Validation::createValidatorBuilder()
             ->enableAnnotationMapping()
             ->getValidator();
@@ -57,7 +57,7 @@ class CloudPrintClient
         try {
             $response = $this->client->sendRequest($request);
         } catch (Exception $e) {
-            throw new NetworkException('A network exception occured!', 0, $e);
+            throw new NetworkException('A network exception occurred!', 0, $e);
         }
 
         $responseBuilder= new ResponseBuilder();

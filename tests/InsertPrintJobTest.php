@@ -16,10 +16,9 @@ class InsertPrintJobTest extends TestCase
     public function testInsertDocumentPrintJob()
     {
         $sdk = new CloudPrintClient();
-        $sdk->login(CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD);
 
         $instruction = new InsertDocumentPrintJobInstruction(
-            'Drucker',
+            'Pixeldrucker',
             'This is the content of the document',
             'document.stm',
             MediaTypes::TEXT_VND_STAR_MARKUP,
@@ -35,10 +34,9 @@ class InsertPrintJobTest extends TestCase
     public function testInsertTemplatePrintJob()
     {
         $sdk = new CloudPrintClient();
-        $sdk->login(CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD);
 
         $instruction = new InsertTemplatePrintJobInstruction(
-            'Drucker',
+            'Pixeldrucker',
             'Standard',
             ['variable'=>'content']
         );
