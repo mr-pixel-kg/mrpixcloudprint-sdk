@@ -33,7 +33,7 @@ class RequestBuilder
         $request = $request->withBody($multipartStream);
         $builder->reset();
 
-        $auth = $this->cloudPrintClient->getAuthentification();
+        $auth = $this->cloudPrintClient->getAuthentication();
         if ($auth !== null) {
             $request = $auth->authenticate($request);
         }

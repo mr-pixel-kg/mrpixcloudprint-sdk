@@ -25,15 +25,27 @@ class CloudPrintClient
     private $validator;
     private $requestBuilder;
 
-    private $authentification;
+    private $authentication;
 
-    public function __construct()
+    public function __construct(?string $username=null, ?string $password=null)
     {
+        // Initilaisation
         $this->validator = Validation::createValidatorBuilder()
             ->enableAnnotationMapping()
             ->getValidator();
         $this->requestBuilder = new RequestBuilder($this);
         $this->client = HttpClientDiscovery::find();
+
+        // If no credentials are provided look for ENV variables
+        if($username == null && $password == null) {
+            $username = getenv(CloudPrintSDK::ENV_USERNAME);
+            $password = getenv(CloudPrintSDK::ENV_PASSWORD);
+        }
+
+        // Authenticate if credentials are given or provided in ENV
+        if($username && $password) {
+            $this->login($username, $password);
+        }
     }
 
     public function send(CloudPrintRequest $cloudPrintRequest): CloudPrintResponse
@@ -58,10 +70,10 @@ class CloudPrintClient
         return $cloudPrintResponse;
     }
 
-    public function checkLoginCredentials($username, $password)
+    public function checkLoginCredentials(string $username, string $password)
     {
         $success = false;
-        $oldAuth = $this->authentification;
+        $oldAuth = $this->authentication;
 
         $this->login($username, $password);
 
@@ -74,19 +86,19 @@ class CloudPrintClient
         } catch (ServerException $e) {
         }
 
-        $this->authentification = $oldAuth;
+        $this->authentication = $oldAuth;
 
         return $success;
     }
 
     public function login(string $username, string $password)
     {
-        $this->authentification = new BasicAuth($username, $password);
+        $this->authentication = new BasicAuth($username, $password);
     }
 
-    public function getAuthentification(): Authentication
+    public function getAuthentication(): Authentication
     {
-        return $this->authentification;
+        return $this->authentication;
     }
 
     private function validateRequest(CloudPrintRequest $request)
