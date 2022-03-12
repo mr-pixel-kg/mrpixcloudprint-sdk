@@ -1,4 +1,10 @@
 # MrpixCloudPrint SDK
+
+![Test](https://github.com/mr-pixel-kg/mrpixcloudprint-sdk/actions/workflows/test.yml/badge.svg)
+![Lines of Code](https://img.shields.io/tokei/lines/github/mr-pixel-kg/mrpixcloudprint-sdk?label=lines%20of%20code)
+![Code Size](https://shields.io/github/languages/code-size/mr-pixel-kg/mrpixcloudprint-sdk)
+![License](https://img.shields.io/github/license/mr-pixel-kg/mrpixcloudprint-sdk)
+
 This is the official PHP SDK of mr.pixel's CloudPrint service. This library contains methods to easily interact with the
 mpXcloudprint API. Below is a short instruction with some examples to get started with this SDK. For additional 
 information, please visit our official documentation.
@@ -26,7 +32,7 @@ $client = new CloudPrintClient();
 ### Authentication
 Some actions require you to be authenticated. There are three options you can use for authentication.
 
-1. Provide login credentials to CloudPrintClient constructor
+1. **Provide login credentials to CloudPrintClient constructor**
 
     The first option is to provide your login credentials when constructing the CloudPrintClient.
     To do this you have to hand over the username in the first argument and the password in the 
@@ -43,7 +49,7 @@ Some actions require you to be authenticated. There are three options you can us
    However, using hardcoded login credentials is not secure. This method is perfect if you want to load credentials 
    dynamically from some configuration. For static credentials, the recommended way is to use environment variables.
 
-2. Environment Variables
+2. **Environment Variables**
 
     If you don't provide your login credentials in the first option, the cloudprint SDK looks for environment variables.
     You can provide your credentials in the following environment variables:
@@ -53,7 +59,7 @@ Some actions require you to be authenticated. There are three options you can us
     MRPIX_CLOUDPRINT_PASSWORD=yourSecretPassword
     ```
 
-3. Explicit login
+3. **Explicit login**
 
     The third option is to login with your credentials only if authentication is required.
     To do this, you have to call the login method before sending requests.
@@ -72,7 +78,7 @@ To test if login credentials are correct, you can use the following example:
 if($client->checkLoginCredentials('your-username@example.com', 'yourSecretPassword'))
 {
     echo 'Login successful!';
-}else{
+} else {
     echo 'Login failed!';
 }
 ```
@@ -95,7 +101,12 @@ $instruction = new InsertTemplatePrintJobInstruction(
 );
 $request = $instruction->buildRequest();
 
-$client->send($request);
+try {
+    $client->send($request);
+} catch (ServerException $e) {
+    // In case of an error
+    echo 'Error '.$response->getStatusCode().": ".$response->getMessage();
+}
 ```
 
 #### Document
@@ -110,5 +121,10 @@ $instruction = new InsertDocumentPrintJobInstruction(
 );
 $request = $instruction->buildRequest();
 
-$client->send($request);
+try {
+    $client->send($request);
+} catch (ServerException $e) {
+    // In case of an error
+    echo 'Error '.$response->getStatusCode().": ".$response->getMessage();
+}
 ```
