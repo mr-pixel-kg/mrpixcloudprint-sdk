@@ -115,7 +115,7 @@ class CloudPrintClient
         }
     }
 
-    private function validateRequest(CloudPrintRequest $request)
+    public function validateRequest(CloudPrintRequest $request)
     {
         $validatorErrors = $this->validator->validate($request);
 

@@ -33,7 +33,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Mrpix\\CloudPrintSDK\\": "src/"
+            "Mrpix\\CloudPrintSDK\\": "src/",
+            "Mrpix\\CloudPrintSDK\\Tests\\": "tests/"
         }
     },
     "scripts": {
