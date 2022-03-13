@@ -40,6 +40,9 @@
         "test": [
             "vendor/bin/phpunit tests"
         ],
+        "test-coverage": [
+            "vendor/bin/phpunit tests --coverage-html test-coverage --coverage-filter src"
+        ],
         "phpstan": [
             "vendor/bin/phpstan analyse"
         ],
