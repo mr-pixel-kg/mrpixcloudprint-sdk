@@ -1,8 +1,8 @@
 # Exceptions
-Below is a short overview about the exeptions.
+Below is a short overview about the exceptions.
 
 ## CloudPrintException
-- interface that gets implemented by all exceptins below
+- interface that gets implemented by all exceptions below
 
 ## ConstraintViolationException
 - is thrown when validating of a CloudPrintRequest failed before building and sending

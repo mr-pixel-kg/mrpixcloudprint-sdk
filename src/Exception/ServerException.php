@@ -15,7 +15,7 @@ class ServerException extends \RuntimeException implements CloudPrintException
 
     public function __construct(CloudPrintResponse $response)
     {
-        parent::__construct('A API-Exception occured!', 0, null);
+        parent::__construct('A API-Exception occurred!', 0, null);
 
         $this->response = $response;
         $this->statusCode = $response->getStatusCode();
