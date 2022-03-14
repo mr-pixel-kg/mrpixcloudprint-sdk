@@ -11,4 +11,9 @@ class PrinterResponse extends CloudPrintResponse
         parent::__construct($data);
         $this->printer = $data['printer'];
     }
+
+    public function getPrinter(): array
+    {
+        return $this->printer;
+    }
 }

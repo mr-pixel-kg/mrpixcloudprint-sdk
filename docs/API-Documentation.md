@@ -1,5 +1,11 @@
 # API Documentation
 
+**Content**
+- [Insert Document PrintJob](#Insert Document PrintJob)
+- [Insert Template PrintJob](#Insert Template PrintJob)
+- [PrintJob Details](#PrintJob Details)
+- [Printer Details](#Printer Details)
+- [Auth Test](#Auth Test)
 
 ## Insert Document PrintJob
 
@@ -197,3 +203,37 @@
     }
 }
 ```
+
+## Auth Test
+
+### Request
+
+| Method | URL                                                 |
+|--------|---------------------------------------------------- |
+| POST   | https://dev.cloudprint.mpxcloud.de/api/v1/auth/test |
+
+**Authorization**
+
+Provide login credentials via HTTP Auth
+
+### Response
+
+**Response 200: Authentication successful**
+```
+{
+    "statusCode": 200,
+    "message": "Access granted"
+}
+```
+
+**Response 401: Authentication failed**
+```
+{
+    "statusCode": 401,
+    "message": "Authentification required"
+}
+```
+
+**Response 401: Authentication failed**
+
+No response content
