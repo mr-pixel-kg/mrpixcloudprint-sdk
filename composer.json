@@ -19,7 +19,7 @@
         "php-http/multipart-stream-builder": "^1.1",
         "symfony/validator": "^5.1",
         "doctrine/annotations": "^1.10",
-        "doctrine/cache": "^1.10",
+        "doctrine/cache": "^2.1",
         "ext-json": "*"
     },
     "require-dev": {
