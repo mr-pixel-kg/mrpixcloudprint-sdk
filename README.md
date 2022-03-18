@@ -16,7 +16,7 @@ This library is not dependent to any http client like Guzzle. You can use any ht
 To get started quickly:
 
 ```
-composer require php-http/guzzle6-adapter nyholm/psr7 symfony/http-client
+composer require guzzlehttp/psr7 symfony/http-client
 ```
 
 ## Usage
