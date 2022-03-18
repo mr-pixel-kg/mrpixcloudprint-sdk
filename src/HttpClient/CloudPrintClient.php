@@ -2,7 +2,7 @@
 
 namespace Mrpix\CloudPrintSDK\HttpClient;
 
-use Http\Client\Exception;
+use Exception;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Message\Authentication;
 use Http\Message\Authentication\BasicAuth;
@@ -10,7 +10,6 @@ use Mrpix\CloudPrintSDK\CloudPrintSDK;
 use Mrpix\CloudPrintSDK\Exception\CloudPrintException;
 use Mrpix\CloudPrintSDK\Exception\ConstraintViolationException;
 use Mrpix\CloudPrintSDK\Exception\NetworkException;
-use Mrpix\CloudPrintSDK\Exception\ResponseDecodeException;
 use Mrpix\CloudPrintSDK\Exception\ServerException;
 use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;

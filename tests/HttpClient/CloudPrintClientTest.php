@@ -5,7 +5,6 @@ namespace Mrpix\CloudPrintSDK\Tests\HttpClient;
 use DateTime;
 use Mrpix\CloudPrintSDK\CloudPrintSDK;
 use Mrpix\CloudPrintSDK\Components\MediaTypes;
-use Mrpix\CloudPrintSDK\Exception\CloudPrintException;
 use Mrpix\CloudPrintSDK\Exception\ConstraintViolationException;
 use Mrpix\CloudPrintSDK\Exception\NetworkException;
 use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
