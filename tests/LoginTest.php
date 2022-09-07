@@ -21,8 +21,8 @@ class LoginTest extends TestCase
     {
         return [
             ['test@example.com', 'thisIsAWrongPassword', false],
-            [CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD, true],
-            [CloudPrintTest::USER_EMAIL, CloudPrintTest::USER_PASSWORD.'_wrong!', false]
+            [CloudPrintTestConstants::USER_EMAIL, CloudPrintTestConstants::USER_PASSWORD, true],
+            [CloudPrintTestConstants::USER_EMAIL, CloudPrintTestConstants::USER_PASSWORD.'_wrong!', false]
         ];
     }
 }

@@ -19,7 +19,7 @@ class InsertPrintJobTest extends TestCase
         $sdk = new CloudPrintClient();
 
         $instruction = new InsertDocumentPrintJobInstruction(
-            CloudPrintTest::PRINTER_NAME,
+            CloudPrintTestConstants::PRINTER_NAME,
             'This is the content of the document',
             'document.stm',
             MediaTypes::TEXT_VND_STAR_MARKUP,
@@ -60,8 +60,8 @@ class InsertPrintJobTest extends TestCase
         $sdk = new CloudPrintClient();
 
         $instruction = new InsertTemplatePrintJobInstruction(
-            CloudPrintTest::PRINTER_NAME,
-            CloudPrintTest::TEMPLATE_NAME,
+            CloudPrintTestConstants::PRINTER_NAME,
+            CloudPrintTestConstants::TEMPLATE_NAME,
             ['variable'=>'content']
         );
         $request = $instruction->buildRequest();
@@ -77,7 +77,7 @@ class InsertPrintJobTest extends TestCase
 
         $instruction = new InsertTemplatePrintJobInstruction(
             'NoPrinter',
-            CloudPrintTest::TEMPLATE_NAME,
+            CloudPrintTestConstants::TEMPLATE_NAME,
             ['variable'=>'content']
         );
         $request = $instruction->buildRequest();
@@ -97,7 +97,7 @@ class InsertPrintJobTest extends TestCase
         $sdk = new CloudPrintClient();
 
         $instruction = new InsertTemplatePrintJobInstruction(
-            CloudPrintTest::PRINTER_NAME,
+            CloudPrintTestConstants::PRINTER_NAME,
             'NoTemplate',
             ['variable'=>'content']
         );

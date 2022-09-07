@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrpix\CloudPrintSDK\Components;
+namespace Mrpix\CloudPrintSDK\Exception;
 
 class JsonException extends \Exception
 {
