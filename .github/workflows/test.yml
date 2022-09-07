@@ -2,9 +2,9 @@ name: Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, development ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, development ]
 
 jobs:
   codestyle:
@@ -97,13 +97,13 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v3
 
-      - name: Setup PHP and Composer 2
+      - name: "Setup PHP and Composer 2"
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           tools: phpunit, composer:v2
 
-      - name: Cache Composer packages
+      - name: "Cache Composer packages"
         id: composer-cache
         uses: actions/cache@v3
         with:
@@ -118,4 +118,4 @@ jobs:
           composer install --no-progress --optimize-autoloader
 
       - name: "Run PhpUnit tests"
-        run: composer run-script test
+        run: composer test
