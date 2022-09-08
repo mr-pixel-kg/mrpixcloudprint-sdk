@@ -2,6 +2,6 @@
 
 namespace Mrpix\CloudPrintSDK\Exception;
 
-interface CloudPrintException extends \Throwable
+class CloudPrintException extends \RuntimeException
 {
 }

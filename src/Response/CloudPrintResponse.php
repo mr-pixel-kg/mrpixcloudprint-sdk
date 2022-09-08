@@ -30,12 +30,12 @@ class CloudPrintResponse
         $this->response = $response;
     }
 
-    public function getRequest()
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }
 
-    public function getResponse()
+    public function getResponse(): ResponseInterface
     {
         return $this->response;
     }

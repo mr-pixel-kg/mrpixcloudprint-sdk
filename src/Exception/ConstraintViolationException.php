@@ -4,7 +4,7 @@ namespace Mrpix\CloudPrintSDK\Exception;
 
 use Throwable;
 
-class ConstraintViolationException extends \RuntimeException implements CloudPrintException
+class ConstraintViolationException extends CloudPrintException
 {
     private $data;
 

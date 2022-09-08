@@ -23,6 +23,9 @@ abstract class CloudPrintRequest
      */
     protected $url;
 
+    /**
+     * @Assert\NotBlank()
+     */
     protected $responseModel;
 
     public function __construct(?string $url=null, ?string $method=self::HTTP_METHOD_GET, ?string $responseModel=CloudPrintResponse::class)

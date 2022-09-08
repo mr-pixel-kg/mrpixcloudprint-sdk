@@ -2,6 +2,6 @@
 
 namespace Mrpix\CloudPrintSDK\Exception;
 
-class ResponseDecodeException extends \RuntimeException implements CloudPrintException
+class ResponseDecodeException extends CloudPrintException
 {
 }

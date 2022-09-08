@@ -25,6 +25,7 @@ class CloudPrintClient
     private $client;
     private $validator;
     private $requestBuilder;
+    private $responseBuilder;
 
     private $authentication;
 
@@ -35,6 +36,7 @@ class CloudPrintClient
             ->enableAnnotationMapping()
             ->getValidator();
         $this->requestBuilder = new RequestBuilder($this);
+        $this->responseBuilder= new ResponseBuilder();
         $this->client = HttpClientDiscovery::find();
 
         // If no credentials are provided look for ENV variables
@@ -61,11 +63,10 @@ class CloudPrintClient
             throw new NetworkException('A network exception occurred!', 0, $e);
         }
 
-        $responseBuilder= new ResponseBuilder();
-        $cloudPrintResponse = $responseBuilder->decodeResponse($request, $response, $cloudPrintRequest->getResponseModel());
+        $cloudPrintResponse = $this->responseBuilder->decodeResponse($request, $response, $cloudPrintRequest->getResponseModel());
 
         if ($response->getStatusCode() !== 200) {
-            throw new ServerException($cloudPrintResponse);
+            throw new ServerException($cloudPrintRequest, $cloudPrintResponse);
         }
 
         return $cloudPrintResponse;
@@ -106,7 +107,7 @@ class CloudPrintClient
     {
         // Change server url if specified in ENV
         $serverUrl = getenv(CloudPrintSDK::ENV_SERVER);
-        ;
+
         if ($serverUrl) {
             return rtrim($serverUrl, "/");
         } else {
@@ -122,10 +123,16 @@ class CloudPrintClient
             $requestViolations = [];
             /** @var ConstraintViolation $violation */
             foreach ($validatorErrors as $violation) {
+                $constraint = null;
+                try {
+                    $constraint = ($violation->getConstraint() !== null) ? (new \ReflectionClass($violation->getConstraint()))->getShortName() : null;
+                } catch (\ReflectionException $e) {
+                }
+
                 array_push($requestViolations, [
                     'field' => $violation->getPropertyPath(),
                     'message' => $violation->getMessage(),
-                    'constraint' => ($violation->getConstraint() !== null) ? (new \ReflectionClass($violation->getConstraint()))->getShortName() : null,
+                    'constraint' => $constraint,
                     'value' => $violation->getInvalidValue()
                 ]);
             }

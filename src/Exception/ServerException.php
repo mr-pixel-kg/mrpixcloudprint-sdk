@@ -2,21 +2,23 @@
 
 namespace Mrpix\CloudPrintSDK\Exception;
 
-use Mrpix\CloudPrintSDK\Components\JsonException;
+use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;
 use Mrpix\CloudPrintSDK\Response\CloudPrintResponse;
 
-class ServerException extends \RuntimeException implements CloudPrintException
+class ServerException extends CloudPrintException
 {
+    protected $request;
     protected $response;
     protected $data;
 
     protected $statusCode;
     protected $exception;
 
-    public function __construct(CloudPrintResponse $response)
+    public function __construct(CloudPrintRequest $request, CloudPrintResponse $response)
     {
         parent::__construct('A API-Exception occurred!', 0, null);
 
+        $this->request = $request;
         $this->response = $response;
         $this->statusCode = $response->getStatusCode();
         $data = $this->response->getData();
@@ -29,6 +31,11 @@ class ServerException extends \RuntimeException implements CloudPrintException
         if (array_key_exists('exception', $data)) {
             $this->exception = new JsonException($data['exception']);
         }
+    }
+
+    public function getRequest(): CloudPrintRequest
+    {
+        return $this->request;
     }
 
     public function getResponse(): CloudPrintResponse
