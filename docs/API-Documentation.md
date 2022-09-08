@@ -1,11 +1,11 @@
 # API Documentation
 
 **Content**
-- [Insert Document PrintJob](#Insert Document PrintJob)
-- [Insert Template PrintJob](#Insert Template PrintJob)
-- [PrintJob Details](#PrintJob Details)
-- [Printer Details](#Printer Details)
-- [Auth Test](#Auth Test)
+- [Insert Document PrintJob](#Insert-Document-PrintJob)
+- [Insert Template PrintJob](#Insert-Template-PrintJob)
+- [PrintJob Details](#PrintJob-Details)
+- [Printer Details](#Printer-Details)
+- [Auth Test](#Auth-Test)
 
 ## Insert Document PrintJob
 
@@ -13,7 +13,7 @@
 
 | Method | URL                                                         |
 |--------|-------------------------------------------------------------|
-| POST   | https://dev.cloudprint.mpxcloud.de/api/v1/printjob/document |
+| POST   | https://cloudprint.mpxcloud.de/api/v1/printjob/document     |
 
 **Parameters**
 
@@ -31,9 +31,9 @@
 {
     "statusCode": 200,
     "printJob": {
-        "id": 1230,
+        "id": "864d6804-1073-4d11-adac-c3da664c5370",
         "printer": {
-            "id": 1,
+            "id": "11ed1d40-e08a-b78d-843b-9600006192ea",
             "name": "Pixeldrucker"
         },
         "document": {
@@ -62,7 +62,7 @@
 
 | Method | URL                                                         |
 |--------|-------------------------------------------------------------|
-| POST   | https://dev.cloudprint.mpxcloud.de/api/v1/printjob/template |
+| POST   | https://cloudprint.mpxcloud.de/api/v1/printjob/template     |
 
 **Parameters**
 
@@ -80,9 +80,9 @@
 {
     "statusCode": 200,
     "printJob": {
-        "id": 1231,
+        "id": "864d6804-1073-4d11-adac-c3da664c5370",
         "printer": {
-            "id": 1,
+            "id": "11ed1d40-e08a-b78d-843b-9600006192ea",
             "name": "Pixeldrucker"
         },
         "document": {
@@ -111,13 +111,13 @@
 
 | Method | URL                                                     |
 |--------|---------------------------------------------------------|
-| GET   | https://dev.cloudprint.mpxcloud.de/api/v1/printjob/1220 |
+| GET   | https://cloudprint.mpxcloud.de/api/v1/printjob/{uuid}    |
 
 **Parameters**
 
-| Name       | Type    | Required | Example | Note |
-|------------|---------|----------|---------|------|
-| printJobId | Integer | yes      | 1220    |      |
+| Name         | Type   | Required | Example                              | Note |
+|--------------|--------|----------|--------------------------------------|------|
+| printJobUuid | String | yes      | a8bb9db6-6510-48f2-97dc-c17b7818a1bc |      |
 
 ### Response
 
@@ -126,9 +126,9 @@
 {
     "statusCode": 200,
     "printJob": {
-        "id": 1220,
+        "id": "864d6804-1073-4d11-adac-c3da664c5370",
         "printer": {
-            "id": 1,
+            "id": "11ed1d40-e08a-b78d-843b-9600006192ea",
             "name": "Pixeldrucker"
         },
         "document": {
@@ -157,13 +157,13 @@
 
 | Method | URL                                                 |
 |--------|-----------------------------------------------------|
-| GET   | https://dev.cloudprint.mpxcloud.de/api/v1/printer/1 |
+| GET   | https://cloudprint.mpxcloud.de/api/v1/printer/{uuid} |
 
 **Parameters**
 
-| Name      | Type    | Required | Example | Note |
-|-----------|---------|----------|---------|------|
-| printerId | Integer | yes      | 1       |      |
+| Name        | Type    | Required | Example                              | Note |
+|-------------|---------|----------|--------------------------------------|------|
+| printerUuid | String  | yes      | a8bb9db6-6510-48f2-97dc-c17b7818a1bc |      |
 
 ### Response
 
@@ -172,10 +172,9 @@
 {
     "statusCode": 200,
     "printer": {
-        "id": 1,
+        "id": "11ed1d40-e08a-b78d-843b-9600006192ea",
         "name": "Pixeldrucker",
         "owner": {
-            "id": 1,
             "email": "manuel.kienlein@mr-pixel.de"
         },
         "macAddress": "00:11:62:1C:29:08",
@@ -210,7 +209,7 @@
 
 | Method | URL                                                 |
 |--------|---------------------------------------------------- |
-| POST   | https://dev.cloudprint.mpxcloud.de/api/v1/auth/test |
+| POST   | https://cloudprint.mpxcloud.de/api/v1/auth/test     |
 
 **Authorization**
 
