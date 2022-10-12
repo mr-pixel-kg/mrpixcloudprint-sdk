@@ -10,6 +10,7 @@ use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertDocumentPrintJobInstruct
 use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertTemplatePrintJobInstruction;
 use Mrpix\CloudPrintSDK\Response\PrintJobResponse;
 use PHPUnit\Framework\TestCase;
+
 use function PHPUnit\Framework\assertEquals;
 
 class InsertPrintJobTest extends TestCase

@@ -4,6 +4,7 @@ namespace Mrpix\CloudPrintSDK\Tests;
 
 use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
 use PHPUnit\Framework\TestCase;
+
 use function PHPUnit\Framework\assertEquals;
 
 class LoginTest extends TestCase
@@ -21,8 +22,8 @@ class LoginTest extends TestCase
     {
         return [
             ['test@example.com', 'thisIsAWrongPassword', false],
-            [CloudPrintTestConstants::USER_EMAIL, CloudPrintTestConstants::USER_PASSWORD, true],
-            [CloudPrintTestConstants::USER_EMAIL, CloudPrintTestConstants::USER_PASSWORD.'_wrong!', false]
+            [getenv('MRPIX_CLOUDPRINT_USERNAME'), getenv('MRPIX_CLOUDPRINT_PASSWORD'), true],
+            [getenv('MRPIX_CLOUDPRINT_USERNAME'), getenv('MRPIX_CLOUDPRINT_PASSWORD').'_wrong!', false]
         ];
     }
 }

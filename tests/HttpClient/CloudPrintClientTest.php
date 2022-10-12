@@ -13,6 +13,7 @@ use Mrpix\CloudPrintSDK\Request\InsertDocumentPrintJobRequest;
 use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertDocumentPrintJobInstruction;
 use Mrpix\CloudPrintSDK\Tests\CloudPrintTestConstants;
 use PHPUnit\Framework\TestCase;
+
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertStringStartsWith;
@@ -21,7 +22,7 @@ class CloudPrintClientTest extends TestCase
 {
     public function testOfflineCloudServer()
     {
-        $sdk = new CloudPrintClient(CloudPrintTestConstants::USER_EMAIL, CloudPrintTestConstants::USER_PASSWORD);
+        $sdk = new CloudPrintClient(getenv('MRPIX_CLOUDPRINT_USERNAME'), getenv('MRPIX_CLOUDPRINT_PASSWORD'));
 
         // Test with working server url
         $success = false;
