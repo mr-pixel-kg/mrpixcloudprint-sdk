@@ -91,7 +91,7 @@ jobs:
       MRPIX_CLOUDPRINT_PASSWORD: ${{ secrets.MRPIX_CLOUDPRINT_PASSWORD }}
     strategy:
       matrix:
-        php-versions: ['7.3', '7.4', '8.0', '8.1']
+        php-versions: ['7.3', '7.4', '8.0', '8.1', '8.2']
 
     steps:
       - name: "Checkout code"
