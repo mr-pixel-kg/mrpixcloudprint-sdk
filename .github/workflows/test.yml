@@ -90,8 +90,9 @@ jobs:
       MRPIX_CLOUDPRINT_USERNAME: ${{ secrets.MRPIX_CLOUDPRINT_USERNAME }}
       MRPIX_CLOUDPRINT_PASSWORD: ${{ secrets.MRPIX_CLOUDPRINT_PASSWORD }}
     strategy:
+      fail-fast: false
       matrix:
-        php-versions: ['7.3', '7.4', '8.0', '8.1', '8.2']
+        php-versions: ['7.4', '8.0', '8.1', '8.2']
 
     steps:
       - name: "Checkout code"

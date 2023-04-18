@@ -10,7 +10,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.3||^8.0",
+        "php": "^7.4||^8.0",
         "psr/http-client": "^1.0.1",
         "php-http/client-common": "^2.2.1",
         "php-http/discovery": "^1.14",
