@@ -1,5 +1,6 @@
 # MrpixCloudPrint SDK
 
+![Version](https://img.shields.io/github/v/release/mr-pixel-kg/mrpixcloudprint-sdk?display_name=tag&sort=semver)
 ![Test](https://github.com/mr-pixel-kg/mrpixcloudprint-sdk/actions/workflows/test.yml/badge.svg)
 ![Lines of Code](https://img.shields.io/tokei/lines/github/mr-pixel-kg/mrpixcloudprint-sdk?label=lines%20of%20code)
 ![Code Size](https://shields.io/github/languages/code-size/mr-pixel-kg/mrpixcloudprint-sdk)
@@ -13,10 +14,19 @@ information, please visit our official documentation.
 This library is not dependent to any http client like Guzzle. You can use any http client hat supports the 
 [php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation).
 
-To get started quickly:
-
+To get started quickly, add this repository to your composer.json file:
 ```
-composer require guzzlehttp/psr7 symfony/http-client
+"repositories": [
+    {
+      "type": "git",
+      "url":  "git@github.com:mr-pixel-kg/mrpixcloudprint-sdk.git"
+    }
+]
+```
+
+Then install your favourite http client like Guzzle or Symfony Http Client:
+```
+composer require mrpix/cloudprintsdk symfony/http-client
 ```
 
 ## Usage
