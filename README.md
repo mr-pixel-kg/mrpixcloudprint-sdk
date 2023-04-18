@@ -115,7 +115,7 @@ try {
     $client->send($request);
 } catch (ServerException $e) {
     // In case of an error
-    echo 'Error '.$response->getStatusCode().": ".$response->getMessage();
+    echo 'Error '.$e->getStatusCode().": ".$e->getMessage();
 }
 ```
 
@@ -135,6 +135,6 @@ try {
     $client->send($request);
 } catch (ServerException $e) {
     // In case of an error
-    echo 'Error '.$response->getStatusCode().": ".$response->getMessage();
+    echo 'Error '.$e->getStatusCode().": ".$e->getMessage();
 }
 ```
