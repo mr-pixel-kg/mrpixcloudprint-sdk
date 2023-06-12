@@ -18,6 +18,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->rule(InlineConstructorDefaultToPropertyRector::class);
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses(false);
+    $rectorConfig->removeUnusedImports();
 
     // define sets of rules
     $rectorConfig->sets([

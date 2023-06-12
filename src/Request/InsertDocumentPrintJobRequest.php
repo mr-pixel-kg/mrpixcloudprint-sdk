@@ -12,7 +12,7 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
     public const ALLOWED_MEDIA_TYPES =  MediaTypes::ALLOWED_INPUT_MEDIATYPES;
 
     #[Assert\NotBlank]
-    #[Assert\Length(min: 16, max: 4096, allowEmptyString: false)]
+    #[Assert\Length(min: 16, max: 4096)]
     protected $documentContent;
 
     #[Assert\NotBlank]

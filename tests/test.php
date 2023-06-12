@@ -2,11 +2,8 @@
 
 use Mrpix\CloudPrintSDK\Response\PrintJobResponse;
 
-require_once __DIR__ . '/../vendor/autoload.php'; // Autoload files using Composer autoload
-
-use Mrpix\CloudPrintSDK\Components\MediaTypes;
+require_once __DIR__ . '/../vendor/autoload.php';
 use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
-use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertDocumentPrintJobInstruction;
 use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertTemplatePrintJobInstruction;
 
 $sdk = new CloudPrintClient();

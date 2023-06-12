@@ -11,7 +11,6 @@ use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
 use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\InsertDocumentPrintJobRequest;
 use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertDocumentPrintJobInstruction;
-use Mrpix\CloudPrintSDK\Tests\CloudPrintTestConstants;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;

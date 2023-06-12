@@ -2,7 +2,9 @@
 
 namespace Mrpix\CloudPrintSDK\HttpClient;
 
+use Symfony\Component\Validator\Constraint;
 use Http\Client\HttpClient;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Exception;
 use Http\Discovery\HttpClientDiscovery;
@@ -16,8 +18,6 @@ use Mrpix\CloudPrintSDK\Exception\ServerException;
 use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;
 use Mrpix\CloudPrintSDK\Response\CloudPrintResponse;
-use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
 class CloudPrintClient
@@ -121,13 +121,17 @@ class CloudPrintClient
     public function validateRequest(CloudPrintRequest $request)
     {
         $validatorErrors = $this->validator->validate($request);
+        if($validatorErrors->count() === 0) {
+            return;
+        }
+
         $requestViolations = [];
-        /** @var ConstraintViolationListInterface $violation */
+        /** @var ConstraintViolationInterface $violation */
         foreach ($validatorErrors as $violation) {
             $constraint = null;
             try {
-                $constraint = ($violation->getConstraint() !== null) ? (new \ReflectionClass($violation->getConstraint()))->getShortName() : null;
-            } catch (\ReflectionException $e) {
+                $constraint = ($violation->getConstraint() instanceof Constraint) ? (new \ReflectionClass($violation->getConstraint()))->getShortName() : null;
+            } catch (\ReflectionException) {
             }
 
             $requestViolations[] = [
