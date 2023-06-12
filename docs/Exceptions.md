@@ -15,8 +15,8 @@ Below is a short overview about the exceptions.
 - issues by the http client e.g. connection issues
 
 ## ResponseDecodeException
-- it thrown when decoding of the server response failed
+- is thrown when decoding of the server response failed
 
 ## ServerException
-- is thrown if api returns an other status code than '200 OK'
+- is thrown if api returns another status code than '200 OK'
 - indicates that request was not successful
