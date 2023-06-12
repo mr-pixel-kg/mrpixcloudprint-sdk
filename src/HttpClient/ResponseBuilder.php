@@ -14,10 +14,10 @@ class ResponseBuilder
     public function decodeResponse(RequestInterface $request, ResponseInterface $response, string $class): CloudPrintResponse
     {
         $body = $response->getBody();
-        $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-
-        if ($data === null) {
-            throw new ResponseDecodeException('Failed to decode response!');
+        try {
+            $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new ResponseDecodeException('Failed to decode response!', 0, $e, $response);
         }
 
         if (is_subclass_of($class, CloudPrintResponse::class)) {

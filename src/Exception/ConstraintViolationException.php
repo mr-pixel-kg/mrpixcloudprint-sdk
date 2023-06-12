@@ -10,7 +10,7 @@ class ConstraintViolationException extends CloudPrintException
 
     public function __construct($message = "", $code = 0, Throwable $previous = null, $data = [])
     {
-        parent::__construct($message.' '.json_encode($data, JSON_THROW_ON_ERROR), $code, $previous);
+        parent::__construct($message.' '.json_encode($data, JSON_ERROR_NONE), $code, $previous);
         $this->data = $data;
     }
 
