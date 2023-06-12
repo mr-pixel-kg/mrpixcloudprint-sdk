@@ -116,7 +116,8 @@ jobs:
       - name: "Install dependencies"
         id: install
         run: |
-          composer install --no-progress --optimize-autoloader
+          composer install --no-dev --no-progress --optimize-autoloader
+          composer require php-http/guzzle7-adapter --no-dev --no-progress --optimize-autoloader
 
       - name: "Run PhpUnit tests"
         run: composer test
