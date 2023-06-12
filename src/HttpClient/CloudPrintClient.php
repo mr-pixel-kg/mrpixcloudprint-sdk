@@ -2,6 +2,8 @@
 
 namespace Mrpix\CloudPrintSDK\HttpClient;
 
+use Http\Client\HttpClient;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Exception;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Message\Authentication;
@@ -15,6 +17,7 @@ use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;
 use Mrpix\CloudPrintSDK\Response\CloudPrintResponse;
 use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
 class CloudPrintClient
@@ -22,10 +25,10 @@ class CloudPrintClient
     public const USER_AGENT = 'MrpixCloudPrintSDK/'.CloudPrintSDK::VERSION;
     public const DEFAULT_SERVER_URL = 'https://cloudprint.mpxcloud.de';
 
-    private $client;
-    private $validator;
-    private $requestBuilder;
-    private $responseBuilder;
+    private HttpClient $client;
+    private ValidatorInterface $validator;
+    private RequestBuilder $requestBuilder;
+    private ResponseBuilder $responseBuilder;
 
     private $authentication;
 
@@ -85,7 +88,7 @@ class CloudPrintClient
             if ($response->getStatusCode() === 200) {
                 $success = true;
             }
-        } catch (CloudPrintException $e) {
+        } catch (CloudPrintException) {
         }
 
         $this->authentication = $oldAuth;
@@ -118,25 +121,22 @@ class CloudPrintClient
     public function validateRequest(CloudPrintRequest $request)
     {
         $validatorErrors = $this->validator->validate($request);
-
-        if (count($validatorErrors) > 0) {
-            $requestViolations = [];
-            /** @var ConstraintViolation $violation */
-            foreach ($validatorErrors as $violation) {
-                $constraint = null;
-                try {
-                    $constraint = ($violation->getConstraint() !== null) ? (new \ReflectionClass($violation->getConstraint()))->getShortName() : null;
-                } catch (\ReflectionException $e) {
-                }
-
-                array_push($requestViolations, [
-                    'field' => $violation->getPropertyPath(),
-                    'message' => $violation->getMessage(),
-                    'constraint' => $constraint,
-                    'value' => $violation->getInvalidValue()
-                ]);
+        $requestViolations = [];
+        /** @var ConstraintViolationListInterface $violation */
+        foreach ($validatorErrors as $violation) {
+            $constraint = null;
+            try {
+                $constraint = ($violation->getConstraint() !== null) ? (new \ReflectionClass($violation->getConstraint()))->getShortName() : null;
+            } catch (\ReflectionException $e) {
             }
-            throw new ConstraintViolationException('Request is not valid!', 0, null, $requestViolations);
+
+            $requestViolations[] = [
+                'field' => $violation->getPropertyPath(),
+                'message' => $violation->getMessage(),
+                'constraint' => $constraint,
+                'value' => $violation->getInvalidValue()
+            ];
         }
+        throw new ConstraintViolationException('Request is not valid!', 0, null, $requestViolations);
     }
 }

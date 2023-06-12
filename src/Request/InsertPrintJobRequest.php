@@ -7,18 +7,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 abstract class InsertPrintJobRequest extends CloudPrintRequest
 {
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^[A-Za-z0-9\-_]{3,16}$/")
-     */
+    #[Assert\NotBlank]
+    #[Assert\Regex("/^[A-Za-z0-9\-_]{3,16}$/")]
     protected $printerName;
 
-    /**
-     * @Assert\AtLeastOneOf({
-     *     @Assert\IsNull(),
-     *     @Assert\Regex("/^[\d]{14,14}$/")
-     * })
-     */
+    #[Assert\AtLeastOneOf([
+        new Assert\IsNull(),
+        new Assert\Regex("/^[\d]{14,14}$/")
+    ])]
     protected $startTime;
 
     public function __construct(?string $url=null, ?string $printerName=null, ?string $startTime=null)

@@ -107,7 +107,7 @@ class CloudPrintClientTest extends TestCase
             $sdk->validateRequest($request);
             $this->fail('Expected that ConstraintViolationException is thrown!');
         } catch (ConstraintViolationException $e) {
-            assertEquals(ConstraintViolationException::class, get_class($e));
+            assertEquals(ConstraintViolationException::class, $e::class);
             assertStringStartsWith('Request is not valid!', $e->getMessage());
 
             $data = $e->getData()[0];
@@ -131,7 +131,7 @@ class CloudPrintClientTest extends TestCase
             $sdk->validateRequest($request);
             $this->fail('Expected that ConstraintViolationException is thrown!');
         } catch (ConstraintViolationException $e) {
-            assertEquals(ConstraintViolationException::class, get_class($e));
+            assertEquals(ConstraintViolationException::class, $e::class);
             assertStringStartsWith('Request is not valid!', $e->getMessage());
 
             $data = $e->getData();
@@ -142,7 +142,7 @@ class CloudPrintClientTest extends TestCase
         }
     }
 
-    private static $envServerUrl;
+    private static string|bool|null $envServerUrl = null;
 
     /**
      * @beforeClass

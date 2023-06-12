@@ -39,6 +39,6 @@ class InsertTemplatePrintJobInstruction extends InsertPrintJobInstruction
 
     public function buildRequest(): InsertTemplatePrintJobRequest
     {
-        return new InsertTemplatePrintJobRequest($this->printerName, $this->templateName, json_encode($this->templateVariables), ($this->startTime) ? $this->startTime->format('YmdHis') : null);
+        return new InsertTemplatePrintJobRequest($this->printerName, $this->templateName, json_encode($this->templateVariables, JSON_THROW_ON_ERROR), ($this->startTime) ? $this->startTime->format('YmdHis') : null);
     }
 }

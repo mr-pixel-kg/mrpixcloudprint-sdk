@@ -11,21 +11,15 @@ abstract class CloudPrintRequest
     public const HTTP_METHOD_GET = 'GET';
     public const HTTP_METHOD_POST = 'POST';
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Choice({"GET", "POST"})
-     */
+    #[Assert\NotBlank]
+    #[Assert\Choice(['GET', 'POST'])]
     protected $method;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Url
-     */
+    #[Assert\NotBlank]
+    #[Assert\Url]
     protected $url;
 
-    /**
-     * @Assert\NotBlank()
-     */
+    #[Assert\NotBlank]
     protected $responseModel;
 
     public function __construct(?string $url=null, ?string $method=self::HTTP_METHOD_GET, ?string $responseModel=CloudPrintResponse::class)

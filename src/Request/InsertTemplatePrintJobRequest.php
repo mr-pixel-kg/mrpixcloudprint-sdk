@@ -8,16 +8,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class InsertTemplatePrintJobRequest extends InsertPrintJobRequest
 {
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^[A-Za-z0-9\-_]{3,16}$/")
-     */
+    #[Assert\NotBlank]
+    #[Assert\Regex("/^[A-Za-z0-9\-_]{3,16}$/")]
     protected $templateName;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Json()
-     */
+    #[Assert\NotBlank]
+    #[Assert\Json]
     protected $templateVariables;
 
     public function __construct(?string $printerName=null, ?string $templateName=null, ?string $templateVariables=null, ?string $startTime=null)
