@@ -33,6 +33,23 @@ class InsertPrintJobTest extends TestCase
         assertEquals(200, $response->getStatusCode());
     }
 
+    public function testInsertDocumentPrintJobNoStartTime()
+    {
+        $sdk = new CloudPrintClient();
+
+        $instruction = new InsertDocumentPrintJobInstruction(
+            CloudPrintTestConstants::PRINTER_NAME,
+            'This is the content of the document',
+            'document.stm',
+            MediaTypes::TEXT_VND_STAR_MARKUP
+        );
+        $request = $instruction->buildRequest();
+
+        /** @var PrintJobResponse $response */
+        $response = $sdk->send($request);
+        assertEquals(200, $response->getStatusCode());
+    }
+
     public function testInsertDocumentPrintJobPrinterNotExistent()
     {
         $sdk = new CloudPrintClient();
@@ -57,6 +74,23 @@ class InsertPrintJobTest extends TestCase
     }
 
     public function testInsertTemplatePrintJob()
+    {
+        $sdk = new CloudPrintClient();
+
+        $instruction = new InsertTemplatePrintJobInstruction(
+            CloudPrintTestConstants::PRINTER_NAME,
+            CloudPrintTestConstants::TEMPLATE_NAME,
+            ['variable'=>'content'],
+            new DateTime('now')
+        );
+        $request = $instruction->buildRequest();
+
+        /** @var PrintJobResponse $response */
+        $response = $sdk->send($request);
+        assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testInsertTemplatePrintJobNoStartTime()
     {
         $sdk = new CloudPrintClient();
 

@@ -11,10 +11,7 @@ abstract class InsertPrintJobRequest extends CloudPrintRequest
     #[Assert\Regex("/^[A-Za-z0-9\-_]{3,16}$/")]
     protected $printerName;
 
-    #[Assert\AtLeastOneOf([
-        new Assert\IsNull(),
-        new Assert\Regex("/^[\d]{14,14}$/")
-    ])]
+    #[Assert\Regex("/^[\d]{14,14}$|^$/")]
     protected $startTime;
 
     public function __construct(?string $url=null, ?string $printerName=null, ?string $startTime=null)
