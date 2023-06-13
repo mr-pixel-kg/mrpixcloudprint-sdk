@@ -2,7 +2,6 @@
 
 ![Version](https://img.shields.io/github/v/release/mr-pixel-kg/mrpixcloudprint-sdk?display_name=tag&sort=semver)
 ![Test](https://github.com/mr-pixel-kg/mrpixcloudprint-sdk/actions/workflows/test.yml/badge.svg)
-![Lines of Code](https://img.shields.io/tokei/lines/github/mr-pixel-kg/mrpixcloudprint-sdk?label=lines%20of%20code)
 ![Code Size](https://shields.io/github/languages/code-size/mr-pixel-kg/mrpixcloudprint-sdk)
 ![License](https://img.shields.io/github/license/mr-pixel-kg/mrpixcloudprint-sdk)
 

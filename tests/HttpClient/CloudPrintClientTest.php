@@ -141,7 +141,7 @@ class CloudPrintClientTest extends TestCase
         }
     }
 
-    private static string|bool|null $envServerUrl = null;
+    private static ?string $envServerUrl = null;
 
     /**
      * @beforeClass
