@@ -11,7 +11,6 @@ use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
 use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\InsertDocumentPrintJobRequest;
 use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertDocumentPrintJobInstruction;
-use Mrpix\CloudPrintSDK\Tests\CloudPrintTestConstants;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
@@ -107,7 +106,7 @@ class CloudPrintClientTest extends TestCase
             $sdk->validateRequest($request);
             $this->fail('Expected that ConstraintViolationException is thrown!');
         } catch (ConstraintViolationException $e) {
-            assertEquals(ConstraintViolationException::class, get_class($e));
+            assertEquals(ConstraintViolationException::class, $e::class);
             assertStringStartsWith('Request is not valid!', $e->getMessage());
 
             $data = $e->getData()[0];
@@ -131,7 +130,7 @@ class CloudPrintClientTest extends TestCase
             $sdk->validateRequest($request);
             $this->fail('Expected that ConstraintViolationException is thrown!');
         } catch (ConstraintViolationException $e) {
-            assertEquals(ConstraintViolationException::class, get_class($e));
+            assertEquals(ConstraintViolationException::class, $e::class);
             assertStringStartsWith('Request is not valid!', $e->getMessage());
 
             $data = $e->getData();
@@ -142,7 +141,7 @@ class CloudPrintClientTest extends TestCase
         }
     }
 
-    private static $envServerUrl;
+    private static ?string $envServerUrl = null;
 
     /**
      * @beforeClass

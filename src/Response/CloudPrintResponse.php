@@ -18,7 +18,7 @@ class CloudPrintResponse
     {
         $this->data = $data;
 
-        $this->statusCode = intval($data['statusCode']);
+        $this->statusCode = (int) $data['statusCode'];
         if (array_key_exists('message', $data)) {
             $this->message = $data['message'];
         }

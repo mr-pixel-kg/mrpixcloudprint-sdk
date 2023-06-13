@@ -37,7 +37,7 @@ class MediaTypes
 
     public static function getFileExtension(string $mediaType): ?string
     {
-        if (in_array($mediaType, array_keys(self::MEDIATYPE_MAP))) {
+        if (array_key_exists($mediaType, self::MEDIATYPE_MAP)) {
             return self::MEDIATYPE_MAP[$mediaType]['ext'];
         } else {
             return null;
@@ -46,7 +46,7 @@ class MediaTypes
 
     public static function getDescription(string $mediaType): ?string
     {
-        if (in_array($mediaType, array_keys(self::MEDIATYPE_MAP))) {
+        if (array_key_exists($mediaType, self::MEDIATYPE_MAP)) {
             return self::MEDIATYPE_MAP[$mediaType]['desc'];
         } else {
             return null;

@@ -11,27 +11,17 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
 {
     public const ALLOWED_MEDIA_TYPES =  MediaTypes::ALLOWED_INPUT_MEDIATYPES;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(
-     *     min = 16,
-     *     max = 4096,
-     *     allowEmptyString = false
-     * )
-     */
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 16, max: 4096)]
     protected $documentContent;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^[-\w.]+\/[-\w.]+$/")
-     * @Assert\Choice(choices=InsertDocumentPrintJobRequest::ALLOWED_MEDIA_TYPES)
-     */
+    #[Assert\NotBlank]
+    #[Assert\Regex('/^[-\w.]+\/[-\w.]+$/')]
+    #[Assert\Choice(choices: InsertDocumentPrintJobRequest::ALLOWED_MEDIA_TYPES)]
     protected $documentMediaType;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^[\w,\s-]+\.[A-Za-z]{2,4}$/")
-     */
+    #[Assert\NotBlank]
+    #[Assert\Regex('/^[\w,\s-]+\.[A-Za-z]{2,4}$/')]
     protected $documentName;
 
     public function __construct(?string $printerName=null, ?string $documentContent=null, ?string $documentName=null, ?string $mediaType=null, ?string $startTime=null)

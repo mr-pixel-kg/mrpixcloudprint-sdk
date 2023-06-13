@@ -2,19 +2,18 @@
 
 namespace Mrpix\CloudPrintSDK\HttpClient;
 
+use Psr\Http\Message\RequestFactoryInterface;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Mrpix\CloudPrintSDK\Request\CloudPrintRequest;
 
 class RequestBuilder
 {
-    private $cloudPrintClient;
-    private $requestFactory;
-    private $multipartStreamBuilder;
+    private RequestFactoryInterface $requestFactory;
+    private MultipartStreamBuilder $multipartStreamBuilder;
 
-    public function __construct(CloudPrintClient $client)
+    public function __construct(private CloudPrintClient $cloudPrintClient)
     {
-        $this->cloudPrintClient = $client;
         $this->requestFactory = Psr17FactoryDiscovery::findRequestFactory();
         $streamFactoryDiscovery = new Psr17FactoryDiscovery();
         $streamFactory = $streamFactoryDiscovery->findStreamFactory();
@@ -34,10 +33,7 @@ class RequestBuilder
         $builder->reset();
 
         $auth = $this->cloudPrintClient->getAuthentication();
-        if ($auth !== null) {
-            $request = $auth->authenticate($request);
-        }
 
-        return $request;
+        return $auth->authenticate($request);
     }
 }
