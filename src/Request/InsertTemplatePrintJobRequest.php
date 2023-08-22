@@ -16,7 +16,7 @@ class InsertTemplatePrintJobRequest extends InsertPrintJobRequest
     #[Assert\Json]
     protected $templateVariables;
 
-    public function __construct(?string $printerName=null, ?string $templateName=null, ?string $templateVariables=null, ?string $startTime=null)
+    public function __construct(?string $printerName = null, ?string $templateName = null, ?string $templateVariables = null, ?string $startTime = null)
     {
         parent::__construct(CloudPrintClient::getServerUrl().'/api/v1/printjob/template', $printerName, $startTime);
         $this->templateName = $templateName;

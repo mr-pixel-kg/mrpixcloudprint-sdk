@@ -80,7 +80,7 @@ class InsertPrintJobTest extends TestCase
         $instruction = new InsertTemplatePrintJobInstruction(
             CloudPrintTestConstants::PRINTER_NAME,
             CloudPrintTestConstants::TEMPLATE_NAME,
-            ['variable'=>'content'],
+            ['variable' => 'content'],
             new DateTime('now')
         );
         $request = $instruction->buildRequest();
@@ -97,7 +97,7 @@ class InsertPrintJobTest extends TestCase
         $instruction = new InsertTemplatePrintJobInstruction(
             CloudPrintTestConstants::PRINTER_NAME,
             CloudPrintTestConstants::TEMPLATE_NAME,
-            ['variable'=>'content']
+            ['variable' => 'content']
         );
         $request = $instruction->buildRequest();
 
@@ -113,7 +113,7 @@ class InsertPrintJobTest extends TestCase
         $instruction = new InsertTemplatePrintJobInstruction(
             'NoPrinter',
             CloudPrintTestConstants::TEMPLATE_NAME,
-            ['variable'=>'content']
+            ['variable' => 'content']
         );
         $request = $instruction->buildRequest();
 
@@ -134,7 +134,7 @@ class InsertPrintJobTest extends TestCase
         $instruction = new InsertTemplatePrintJobInstruction(
             CloudPrintTestConstants::PRINTER_NAME,
             'NoTemplate',
-            ['variable'=>'content']
+            ['variable' => 'content']
         );
         $request = $instruction->buildRequest();
 

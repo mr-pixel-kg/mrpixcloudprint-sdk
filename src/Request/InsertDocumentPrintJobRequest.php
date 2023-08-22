@@ -24,7 +24,7 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
     #[Assert\Regex('/^[\w,\s-]+\.[A-Za-z]{2,4}$/')]
     protected $documentName;
 
-    public function __construct(?string $printerName=null, ?string $documentContent=null, ?string $documentName=null, ?string $mediaType=null, ?string $startTime=null)
+    public function __construct(?string $printerName = null, ?string $documentContent = null, ?string $documentName = null, ?string $mediaType = null, ?string $startTime = null)
     {
         parent::__construct(CloudPrintClient::getServerUrl().'/api/v1/printjob/document', $printerName, $startTime);
         $this->documentContent = $documentContent;

@@ -10,7 +10,7 @@ class InsertTemplatePrintJobInstruction extends InsertPrintJobInstruction
     protected $templateName;
     protected $templateVariables = [];
 
-    public function __construct(?string $printerName=null, ?string $templateName=null, array $templateVariables=[], ?DateTime $startTime=null)
+    public function __construct(?string $printerName = null, ?string $templateName = null, array $templateVariables = [], ?DateTime $startTime = null)
     {
         parent::__construct($printerName, $startTime);
         $this->templateName = $templateName;
