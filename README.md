@@ -3,9 +3,10 @@
 ![Version](https://img.shields.io/github/v/release/mr-pixel-kg/mrpixcloudprint-sdk?display_name=tag&sort=semver)
 ![Test](https://github.com/mr-pixel-kg/mrpixcloudprint-sdk/actions/workflows/test.yml/badge.svg)
 ![Code Size](https://shields.io/github/languages/code-size/mr-pixel-kg/mrpixcloudprint-sdk)
+![Downloads](https://img.shields.io/packagist/dt/mrpix/cloudprintsdk)
 ![License](https://img.shields.io/github/license/mr-pixel-kg/mrpixcloudprint-sdk)
 
-This is the official PHP SDK of mr.pixel's CloudPrint service. This library contains methods to easily interact with the
+This is the official PHP SDK of mr. pixel's CloudPrint service. This library contains methods to easily interact with the
 mpXcloudprint API. Below is a short instruction with some examples to get started with this SDK. For additional 
 information, please visit our official documentation.
 
@@ -13,17 +14,7 @@ information, please visit our official documentation.
 This library is not dependent to any http client like Guzzle. You can use any http client hat supports the 
 [php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation).
 
-To get started quickly, add this repository to your composer.json file:
-```
-"repositories": [
-    {
-      "type": "git",
-      "url":  "git@github.com:mr-pixel-kg/mrpixcloudprint-sdk.git"
-    }
-]
-```
-
-Then install your favourite http client like Guzzle or Symfony Http Client:
+To get started quickly, install the cloudprint-sdk along with your favourite http client like Guzzle or Symfony Http Client:
 ```
 composer require mrpix/cloudprintsdk symfony/http-client
 ```
