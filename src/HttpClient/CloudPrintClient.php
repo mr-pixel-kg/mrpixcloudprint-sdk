@@ -32,14 +32,14 @@ class CloudPrintClient
 
     private $authentication;
 
-    public function __construct(?string $username=null, ?string $password=null)
+    public function __construct(?string $username = null, ?string $password = null)
     {
         // Initialisation
         $this->validator = Validation::createValidatorBuilder()
             ->enableAnnotationMapping()
             ->getValidator();
         $this->requestBuilder = new RequestBuilder($this);
-        $this->responseBuilder= new ResponseBuilder();
+        $this->responseBuilder = new ResponseBuilder();
         $this->client = HttpClientDiscovery::find();
 
         // If no credentials are provided look for ENV variables

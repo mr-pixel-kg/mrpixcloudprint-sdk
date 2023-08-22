@@ -14,7 +14,7 @@ abstract class InsertPrintJobRequest extends CloudPrintRequest
     #[Assert\Regex("/^[\d]{14,14}$|^$/")]
     protected $startTime;
 
-    public function __construct(?string $url=null, ?string $printerName=null, ?string $startTime=null)
+    public function __construct(?string $url = null, ?string $printerName = null, ?string $startTime = null)
     {
         parent::__construct($url, CloudPrintRequest::HTTP_METHOD_POST, PrintJobResponse::class);
         $this->printerName = $printerName;

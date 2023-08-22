@@ -11,7 +11,7 @@ class InsertDocumentPrintJobInstruction extends InsertPrintJobInstruction
     protected $documentName;
     protected $documentMediaType;
 
-    public function __construct(?string $printerName=null, ?string $documentContent=null, ?string $documentName=null, string $mediaType=null, ?DateTime $startTime=null)
+    public function __construct(?string $printerName = null, ?string $documentContent = null, ?string $documentName = null, string $mediaType = null, ?DateTime $startTime = null)
     {
         parent::__construct($printerName, $startTime);
         $this->documentContent = $documentContent;

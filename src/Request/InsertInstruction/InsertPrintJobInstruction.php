@@ -9,7 +9,7 @@ abstract class InsertPrintJobInstruction
     protected $printerName;
     protected $startTime;
 
-    public function __construct(string $printerName=null, DateTime $startTime=null)
+    public function __construct(string $printerName = null, DateTime $startTime = null)
     {
         $this->printerName = $printerName;
         $this->startTime = $startTime;
