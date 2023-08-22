@@ -84,7 +84,6 @@ jobs:
   unit-tests:
     name: "Unit Tests"
     runs-on: ubuntu-latest
-    environment: testing
     env:
       MRPIX_CLOUDPRINT_SERVER: ${{ secrets.MRPIX_CLOUDPRINT_SERVER }}
       MRPIX_CLOUDPRINT_USERNAME: ${{ secrets.MRPIX_CLOUDPRINT_USERNAME }}
