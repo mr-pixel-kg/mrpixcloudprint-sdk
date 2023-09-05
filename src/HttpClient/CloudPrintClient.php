@@ -101,7 +101,7 @@ class CloudPrintClient
         $this->authentication = new BasicAuth($username, $password);
     }
 
-    public function getAuthentication(): Authentication
+    public function getAuthentication(): ?Authentication
     {
         return $this->authentication;
     }

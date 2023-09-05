@@ -84,10 +84,6 @@ jobs:
   unit-tests:
     name: "Unit Tests"
     runs-on: ubuntu-latest
-    env:
-      MRPIX_CLOUDPRINT_SERVER: ${{ secrets.MRPIX_CLOUDPRINT_SERVER }}
-      MRPIX_CLOUDPRINT_USERNAME: ${{ secrets.MRPIX_CLOUDPRINT_USERNAME }}
-      MRPIX_CLOUDPRINT_PASSWORD: ${{ secrets.MRPIX_CLOUDPRINT_PASSWORD }}
     strategy:
       fail-fast: false
       matrix:
@@ -119,4 +115,8 @@ jobs:
           composer require php-http/guzzle7-adapter --no-progress --optimize-autoloader
 
       - name: "Run PhpUnit tests"
+        env:
+          MRPIX_CLOUDPRINT_SERVER: ${{ secrets.MRPIX_CLOUDPRINT_SERVER }}
+          MRPIX_CLOUDPRINT_USERNAME: ${{ secrets.MRPIX_CLOUDPRINT_USERNAME }}
+          MRPIX_CLOUDPRINT_PASSWORD: ${{ secrets.MRPIX_CLOUDPRINT_PASSWORD }}
         run: composer test
