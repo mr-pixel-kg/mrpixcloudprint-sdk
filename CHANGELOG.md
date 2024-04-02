@@ -5,11 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.3.0] - 2024-04-02
-## Changed
+### Changed
 - Updated composer dependencies
 - Support for Psr18 HTTP Client Standard
 
-# Fixed
+### Fixed
 - Check array key of responses before mapping to object
 - Validator uses now php attributes for object validation
 
