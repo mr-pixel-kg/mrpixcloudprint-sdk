@@ -2,12 +2,11 @@
 
 namespace Mrpix\CloudPrintSDK\HttpClient;
 
+use Http\Discovery\Psr18Client;
 use Symfony\Component\Validator\Constraint;
-use Http\Client\HttpClient;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Exception;
-use Http\Discovery\HttpClientDiscovery;
 use Http\Message\Authentication;
 use Http\Message\Authentication\BasicAuth;
 use Mrpix\CloudPrintSDK\CloudPrintSDK;
@@ -25,7 +24,7 @@ class CloudPrintClient
     public const USER_AGENT = 'MrpixCloudPrintSDK/'.CloudPrintSDK::VERSION;
     public const DEFAULT_SERVER_URL = 'https://cloudprint.mpxcloud.de';
 
-    private HttpClient $client;
+    private Psr18Client $client;
     private ValidatorInterface $validator;
     private RequestBuilder $requestBuilder;
     private ResponseBuilder $responseBuilder;
@@ -40,7 +39,7 @@ class CloudPrintClient
             ->getValidator();
         $this->requestBuilder = new RequestBuilder($this);
         $this->responseBuilder = new ResponseBuilder();
-        $this->client = HttpClientDiscovery::find();
+        $this->client = new Psr18Client();
 
         // If no credentials are provided look for ENV variables
         if ($username == null && $password == null) {
