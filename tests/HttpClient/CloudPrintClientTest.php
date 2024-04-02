@@ -11,6 +11,8 @@ use Mrpix\CloudPrintSDK\HttpClient\CloudPrintClient;
 use Mrpix\CloudPrintSDK\Request\CheckLoginRequest;
 use Mrpix\CloudPrintSDK\Request\InsertDocumentPrintJobRequest;
 use Mrpix\CloudPrintSDK\Request\InsertInstruction\InsertDocumentPrintJobInstruction;
+use PHPUnit\Framework\Attributes\AfterClass;
+use PHPUnit\Framework\Attributes\BeforeClass;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
@@ -143,17 +145,13 @@ class CloudPrintClientTest extends TestCase
 
     private static ?string $envServerUrl = null;
 
-    /**
-     * @beforeClass
-     */
+    #[BeforeClass]
     public static function backupServerEnvironmentVariable(): void
     {
         self::$envServerUrl = getenv(CloudPrintSDK::ENV_SERVER);
     }
 
-    /**
-     * @afterClass
-     */
+    #[AfterClass]
     public static function tearDownChangedServerEnvironmentVariable(): void
     {
         putenv(CloudPrintSDK::ENV_SERVER.'='.self::$envServerUrl);

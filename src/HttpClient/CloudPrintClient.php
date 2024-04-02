@@ -36,7 +36,7 @@ class CloudPrintClient
     {
         // Initialisation
         $this->validator = Validation::createValidatorBuilder()
-            ->enableAnnotationMapping()
+            ->enableAttributeMapping()
             ->getValidator();
         $this->requestBuilder = new RequestBuilder($this);
         $this->responseBuilder = new ResponseBuilder();
