@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Cache Composer packages"
         id: composer-cache
@@ -38,7 +38,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Cache Composer packages"
         id: composer-cache
@@ -63,7 +63,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Validate composer.json and composer.lock"
         run: composer validate --strict
@@ -91,7 +91,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Setup PHP and Composer 2"
         uses: shivammathur/setup-php@v2
