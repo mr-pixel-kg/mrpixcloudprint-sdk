@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master, development ]
 
+env:
+  PHP_VERSION: 8.2
+
 jobs:
   codestyle:
     name: "Code Style Analysis"
@@ -13,11 +16,17 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ env.PHP_VERSION }} and Composer 2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          tools: composer:v2
 
       - name: "Cache Composer packages"
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -38,11 +47,18 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+
+      - name: Setup PHP ${{ env.PHP_VERSION }} and Composer 2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          tools: composer:v2
 
       - name: "Cache Composer packages"
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -63,14 +79,21 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+
+      - name: Setup PHP ${{ env.PHP_VERSION }} and Composer 2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          tools: composer:v2
 
       - name: "Validate composer.json and composer.lock"
         run: composer validate --strict
 
       - name: "Cache Composer packages"
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -84,18 +107,14 @@ jobs:
   unit-tests:
     name: "Unit Tests"
     runs-on: ubuntu-latest
-    env:
-      MRPIX_CLOUDPRINT_SERVER: ${{ secrets.MRPIX_CLOUDPRINT_SERVER }}
-      MRPIX_CLOUDPRINT_USERNAME: ${{ secrets.MRPIX_CLOUDPRINT_USERNAME }}
-      MRPIX_CLOUDPRINT_PASSWORD: ${{ secrets.MRPIX_CLOUDPRINT_PASSWORD }}
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['8.0', '8.1', '8.2']
+        php-versions: ['8.2', '8.3']
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "Setup PHP and Composer 2"
         uses: shivammathur/setup-php@v2
@@ -105,7 +124,7 @@ jobs:
 
       - name: "Cache Composer packages"
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -119,4 +138,8 @@ jobs:
           composer require php-http/guzzle7-adapter --no-progress --optimize-autoloader
 
       - name: "Run PhpUnit tests"
+        env:
+          MRPIX_CLOUDPRINT_SERVER: ${{ secrets.MRPIX_CLOUDPRINT_SERVER }}
+          MRPIX_CLOUDPRINT_USERNAME: ${{ secrets.MRPIX_CLOUDPRINT_USERNAME }}
+          MRPIX_CLOUDPRINT_PASSWORD: ${{ secrets.MRPIX_CLOUDPRINT_PASSWORD }}
         run: composer test
