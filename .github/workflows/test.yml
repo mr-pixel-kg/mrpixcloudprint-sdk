@@ -7,7 +7,7 @@ on:
     branches: [ master, development ]
 
 env:
-  PHP_VERSION: 8.2
+  PHP_VERSION: 8.4
 
 jobs:
   codestyle:
@@ -110,7 +110,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['8.2', '8.3']
+        php-versions: ['8.2', '8.3', '8.4']
 
     steps:
       - name: "Checkout code"
@@ -136,6 +136,48 @@ jobs:
         run: |
           composer install --no-dev --no-progress --optimize-autoloader
           composer require php-http/guzzle7-adapter --no-progress --optimize-autoloader
+
+      - name: "Run PhpUnit tests"
+        env:
+          MRPIX_CLOUDPRINT_SERVER: ${{ secrets.MRPIX_CLOUDPRINT_SERVER }}
+          MRPIX_CLOUDPRINT_USERNAME: ${{ secrets.MRPIX_CLOUDPRINT_USERNAME }}
+          MRPIX_CLOUDPRINT_PASSWORD: ${{ secrets.MRPIX_CLOUDPRINT_PASSWORD }}
+        run: composer test
+
+  shopware-integration-tests:
+    name: "Shopware Integration Tests"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['8.2', '8.3', '8.4']
+        shopware-versions: ['6.4.0.0', '6.5.0.0', '6.6.0.0']
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "Setup PHP and Composer 2"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: phpunit, composer:v2
+
+      - name: "Cache Composer packages"
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: "Install dependencies"
+        id: install
+        run: |
+          composer install --no-dev --no-progress --optimize-autoloader
+          composer require php-http/guzzle7-adapter --no-progress --optimize-autoloader
+          composer require shopware/core:${{ matrix.shopware-versions }} --no-progress --optimize-autoloader
 
       - name: "Run PhpUnit tests"
         env:
