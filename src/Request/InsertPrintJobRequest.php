@@ -9,10 +9,10 @@ abstract class InsertPrintJobRequest extends CloudPrintRequest
 {
     #[Assert\NotBlank]
     #[Assert\Regex("/^[A-Za-z0-9\-_]{3,16}$/")]
-    protected $printerName;
+    protected ?string $printerName;
 
     #[Assert\Regex("/^[\d]{14,14}$|^$/")]
-    protected $startTime;
+    protected ?string $startTime;
 
     public function __construct(?string $url = null, ?string $printerName = null, ?string $startTime = null)
     {

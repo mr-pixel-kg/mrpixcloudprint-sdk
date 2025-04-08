@@ -7,12 +7,12 @@ use Psr\Http\Message\ResponseInterface;
 
 class CloudPrintResponse
 {
-    protected $request;
-    protected $response;
-    protected $data;
+    protected RequestInterface $request;
+    protected ResponseInterface $response;
+    protected array $data;
 
-    protected $statusCode;
-    protected $message;
+    protected int $statusCode;
+    protected string $message;
 
     public function __construct(array $data)
     {

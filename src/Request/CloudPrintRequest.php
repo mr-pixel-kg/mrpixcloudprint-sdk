@@ -13,14 +13,14 @@ abstract class CloudPrintRequest
 
     #[Assert\NotBlank]
     #[Assert\Choice(['GET', 'POST'])]
-    protected $method;
+    protected ?string $method;
 
     #[Assert\NotBlank]
     #[Assert\Url]
-    protected $url;
+    protected ?string $url;
 
     #[Assert\NotBlank]
-    protected $responseModel;
+    protected ?string $responseModel;
 
     public function __construct(?string $url = null, ?string $method = self::HTTP_METHOD_GET, ?string $responseModel = CloudPrintResponse::class)
     {

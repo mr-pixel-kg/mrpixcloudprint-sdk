@@ -4,7 +4,7 @@ namespace Mrpix\CloudPrintSDK\Response;
 
 class PrinterResponse extends CloudPrintResponse
 {
-    private $printer;
+    private array $printer;
 
     public function __construct(array $data)
     {

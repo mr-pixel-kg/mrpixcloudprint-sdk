@@ -7,11 +7,11 @@ use Mrpix\CloudPrintSDK\Response\CloudPrintResponse;
 
 class ServerException extends CloudPrintException
 {
-    protected $request;
-    protected $response;
+    protected CloudPrintRequest $request;
+    protected CloudPrintResponse $response;
     protected $data;
 
-    protected $statusCode;
+    protected int $statusCode;
     protected $exception;
 
     public function __construct(CloudPrintRequest $request, CloudPrintResponse $response)
