@@ -145,13 +145,20 @@ jobs:
         run: composer test
 
   shopware-integration-tests:
-    name: "Shopware Integration Tests"
+    name: "Shopware Compatability"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['8.2', '8.3', '8.4']
-        shopware-versions: ['6.4.0.0', '6.5.0.0', '6.6.0.0']
+        include:
+          - shopware: '6.6.10.2'
+            php: '8.4'
+          - shopware: '6.6.10.2'
+            php: '8.3'
+          - shopware: '6.5.8.12'
+            php: '8.2'
+          - shopware: '6.4.20.2'
+            php: '8.2'
 
     steps:
       - name: "Checkout code"
