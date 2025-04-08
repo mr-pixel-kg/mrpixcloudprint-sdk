@@ -145,20 +145,18 @@ jobs:
         run: composer test
 
   shopware-integration-tests:
-    name: "Shopware Compatability"
+    name: "SW Compatability"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          - shopware: '6.6.10.2'
-            php: '8.4'
-          - shopware: '6.6.10.2'
-            php: '8.3'
-          - shopware: '6.5.8.12'
-            php: '8.2'
-          - shopware: '6.4.20.2'
-            php: '8.2'
+          - shopware-version: '6.6.10.2'
+            php-version: '8.4'
+          - shopware-version: '6.6.10.2'
+            php-version: '8.3'
+          - shopware-version: '6.6.10.2'
+            php-version: '8.2'
 
     steps:
       - name: "Checkout code"
@@ -167,24 +165,13 @@ jobs:
       - name: "Setup PHP and Composer 2"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: ${{ matrix.php-version }}
           tools: phpunit, composer:v2
-
-      - name: "Cache Composer packages"
-        id: composer-cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
 
       - name: "Install dependencies"
         id: install
         run: |
-          composer require php-http/guzzle7-adapter --no-progress --optimize-autoloader
-          composer require shopware/core:${{ matrix.shopware-versions }} --no-update
-          composer update --no-dev --no-interaction --with-all-dependencies
+          composer require shopware/core:${{ matrix.shopware-version }} --no-interaction --with-all-dependencies
 
       - name: "Run PhpUnit tests"
         env:
