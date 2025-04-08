@@ -7,7 +7,7 @@ on:
     branches: [ master, development ]
 
 env:
-  PHP_VERSION: 8.4
+  PHP_VERSION: 8.3
 
 jobs:
   codestyle:
@@ -175,9 +175,9 @@ jobs:
       - name: "Install dependencies"
         id: install
         run: |
-          composer install --no-dev --no-progress --optimize-autoloader
           composer require php-http/guzzle7-adapter --no-progress --optimize-autoloader
-          composer require shopware/core:${{ matrix.shopware-versions }} --no-progress --optimize-autoloader
+          composer require shopware/core:${{ matrix.shopware-versions }} --no-update
+          composer update --no-dev --no-interaction --with-all-dependencies
 
       - name: "Run PhpUnit tests"
         env:
