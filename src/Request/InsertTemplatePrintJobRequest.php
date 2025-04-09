@@ -10,11 +10,11 @@ class InsertTemplatePrintJobRequest extends InsertPrintJobRequest
 {
     #[Assert\NotBlank]
     #[Assert\Regex("/^[A-Za-z0-9\-_]{3,16}$/")]
-    protected $templateName;
+    protected ?string $templateName;
 
     #[Assert\NotBlank]
     #[Assert\Json]
-    protected $templateVariables;
+    protected ?string $templateVariables;
 
     public function __construct(?string $printerName = null, ?string $templateName = null, ?string $templateVariables = null, ?string $startTime = null)
     {

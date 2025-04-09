@@ -7,8 +7,8 @@ use Mrpix\CloudPrintSDK\Request\InsertTemplatePrintJobRequest;
 
 class InsertTemplatePrintJobInstruction extends InsertPrintJobInstruction
 {
-    protected $templateName;
-    protected $templateVariables = [];
+    protected ?string $templateName;
+    protected array $templateVariables = [];
 
     public function __construct(?string $printerName = null, ?string $templateName = null, array $templateVariables = [], ?DateTime $startTime = null)
     {

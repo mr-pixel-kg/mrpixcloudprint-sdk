@@ -13,16 +13,16 @@ class InsertDocumentPrintJobRequest extends InsertPrintJobRequest
 
     #[Assert\NotBlank]
     #[Assert\Length(min: 16, max: 4096)]
-    protected $documentContent;
+    protected ?string $documentContent;
 
     #[Assert\NotBlank]
     #[Assert\Regex('/^[-\w.]+\/[-\w.]+$/')]
     #[Assert\Choice(choices: InsertDocumentPrintJobRequest::ALLOWED_MEDIA_TYPES)]
-    protected $documentMediaType;
+    protected ?string $documentMediaType;
 
     #[Assert\NotBlank]
     #[Assert\Regex('/^[\w,\s-]+\.[A-Za-z]{2,4}$/')]
-    protected $documentName;
+    protected ?string $documentName;
 
     public function __construct(?string $printerName = null, ?string $documentContent = null, ?string $documentName = null, ?string $mediaType = null, ?string $startTime = null)
     {

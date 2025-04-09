@@ -120,7 +120,7 @@ class CloudPrintClient
     public function validateRequest(CloudPrintRequest $request)
     {
         $validatorErrors = $this->validator->validate($request);
-        if($validatorErrors->count() === 0) {
+        if ($validatorErrors->count() === 0) {
             return;
         }
 
